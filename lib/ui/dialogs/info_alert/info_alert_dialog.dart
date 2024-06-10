@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:smartpay/ui/common/app_colors.dart';
-import 'package:smartpay/ui/common/ui_helpers.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+
+import '../../common/app_colors.dart';
+import '../../common/ui_helpers.dart';
 import 'info_alert_dialog_model.dart';
 
 const double _graphicSize = 60;

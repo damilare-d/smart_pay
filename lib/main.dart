@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:smartpay/app/app.bottomsheets.dart';
-import 'package:smartpay/app/app.dialogs.dart';
-import 'package:smartpay/app/app.locator.dart';
 import 'package:smartpay/app/app.router.dart';
-import 'package:stacked_services/stacked_services.dart';
+import 'package:smartpay/ui/styles/theme_manager.dart';
+
+import 'app/application.dart';
+
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await setupLocator();
-  setupDialogUi();
-  setupBottomSheetUi();
+  await Application.initialize();
   runApp(const MainApp());
 }
 
@@ -19,6 +16,11 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: Application.appName,
+      themeMode: locator<ThemeNotifier>().themeMode,
+      theme: locator<ThemeNotifier>().lightTheme,
+     // darkTheme: locator<ThemeNotifier>().darkTheme,
       initialRoute: Routes.startupView,
       onGenerateRoute: StackedRouter().onGenerateRoute,
       navigatorKey: StackedService.navigatorKey,
