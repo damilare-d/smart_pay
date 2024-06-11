@@ -22,7 +22,7 @@ class AppColor {
 
   static final Color splashColor = Colors.grey.shade400;
 
-  static const int primaryColorValue = 0xFF3C5BE5;
+  static const int primaryColorValue = 0xff111827;
 
   static const MaterialColor primarySwatch = MaterialColor(
     primaryColorValue,

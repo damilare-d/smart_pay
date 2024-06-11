@@ -12,4 +12,5 @@ const Color kcBackgroundColor = kcDarkGreyColor;
 const Color kcAccentLightColor1 = Color(0xFF2FA2B9);
 const Color kcAccentLightColor2 = Color(0xFF111827);
 const Color kcAccentLightColor3 = Color(0xFF585d68);
+const Color kcAccentLightColor4 = Color(0xFF6B7280);
 const Color kcPrimaryTextLightColor = Color(0xffffffff);

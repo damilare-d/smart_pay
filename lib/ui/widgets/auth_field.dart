@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:smartpay/ui/styles/colors.dart';
 
 class AuthField extends StatelessWidget {
   final TextEditingController controller;
@@ -39,22 +42,28 @@ class AuthField extends StatelessWidget {
     return Stack(
       children: [
         TextFormField(
+          style: const TextStyle(
+            fontWeight: FontWeight.w600,fontSize: 16
+          )
+          ,
           keyboardType: textInputType,
           maxLines: maxLines,
           controller: controller,
           onChanged: onChanged,
           obscureText: isPassword ? isVisible : false,
           decoration: InputDecoration(
+
+            filled: true,
+            fillColor: const Color(0xffF9FAFB),
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color:
-                    (labelText == null) ? Colors.grey.shade300 : borderColor!,
+              borderSide: const BorderSide(
+                color: kcAccentLightColor1,
               ),
               borderRadius: borderRadius ?? BorderRadius.zero,
             ),
             enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.grey.shade300,
+                borderSide: const BorderSide(
+                  color: Colors.transparent,
                 ),
                 borderRadius: borderRadius ?? BorderRadius.zero),
             hintText: hintText,
