@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:smartpay/app/app.locator.dart';
+import 'package:smartpay/app/app.router.dart';
+import 'package:smartpay/app/application.dart';
 import 'package:stacked/stacked.dart';
 
 class CreateNewPasswordViewModel extends BaseViewModel{
+
+  final _navigationService = locator<NavigationService>();
 
   TextEditingController createPasswordController  = TextEditingController();
   TextEditingController confirmPasswordController  = TextEditingController();
@@ -21,5 +26,6 @@ class CreateNewPasswordViewModel extends BaseViewModel{
   }
 
   void createNewPassword() {
+    _navigationService.navigateTo(Routes.signInView);
   }
 }

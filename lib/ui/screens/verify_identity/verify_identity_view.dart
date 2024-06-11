@@ -17,7 +17,7 @@ class VerifyIdentityView extends StatelessWidget {
         BuildContext context, VerifyIdentityViewModel viewModel, Widget? child
         ){
           return Scaffold(
-            body: Padding(
+            body: SingleChildScrollView(
               padding: const EdgeInsets.all(24.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -33,7 +33,7 @@ class VerifyIdentityView extends StatelessWidget {
                   const SizedBox(height: 12,),
                   const Text("Where would you like Smartpay to send your security code?"),
                   const SizedBox(height: 32,),
-                  
+
                   /// todo
                   /// create a list tile ....
 

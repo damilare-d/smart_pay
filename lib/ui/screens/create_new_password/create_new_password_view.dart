@@ -20,37 +20,40 @@ class CreateNewPasswordView extends StatelessWidget {
             ){
           return Scaffold(
             appBar: const CustomAppBar(),
-            body: Column(
-              children: [
-                const Text("data"),
-                const SizedBox(height: 12,),
-                const Text("Please, enter a new password below different from the previous password"),
-                const SizedBox(height: 32,),
-                AuthField(
-                  controller: viewModel.createPasswordController,
-                  hintText: 'Create Password',
-                  isVisible: viewModel.isCreatePassWordVisible,
-                  borderRadius: BorderRadius.circular(16),
-                  isPassword: true,
-                  isBorderColor: true,
-                  maxLines: 1,
-                  changeVisibilty: viewModel.changeCreatePasswordVisibility,
-                ),
-                const SizedBox(height: 16,),
-                AuthField(
-                  controller: viewModel.confirmPasswordController,
-                  hintText: 'Confirm Password',
-                  isVisible: viewModel.isConfirmPassWordVisible,
-                  borderRadius: BorderRadius.circular(16),
-                  isPassword: true,
-                  isBorderColor: true,
-                  maxLines: 1,
-                  changeVisibilty: viewModel.changeConfirmPasswordVisibility,
-                ),
-                Container(),
-                CustomButton(text: "Create new password", onPressed: viewModel.createNewPassword)
+            body: SingleChildScrollView(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  const Text("data"),
+                  const SizedBox(height: 12,),
+                  const Text("Please, enter a new password below different from the previous password"),
+                  const SizedBox(height: 32,),
+                  AuthField(
+                    controller: viewModel.createPasswordController,
+                    hintText: 'Create Password',
+                    isVisible: viewModel.isCreatePassWordVisible,
+                    borderRadius: BorderRadius.circular(16),
+                    isPassword: true,
+                    isBorderColor: true,
+                    maxLines: 1,
+                    changeVisibilty: viewModel.changeCreatePasswordVisibility,
+                  ),
+                  const SizedBox(height: 16,),
+                  AuthField(
+                    controller: viewModel.confirmPasswordController,
+                    hintText: 'Confirm Password',
+                    isVisible: viewModel.isConfirmPassWordVisible,
+                    borderRadius: BorderRadius.circular(16),
+                    isPassword: true,
+                    isBorderColor: true,
+                    maxLines: 1,
+                    changeVisibilty: viewModel.changeConfirmPasswordVisibility,
+                  ),
+                  Container(),
+                  CustomButton(text: "Create new password", onPressed: viewModel.createNewPassword)
 
-              ],
+                ],
+              ),
             ),
           );
 

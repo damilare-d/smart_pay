@@ -12,6 +12,7 @@ class SignInViewModel extends BaseViewModel{
 
 
   void signIn() {
+    _navigationService.navigateTo(Routes.homeView);
   }
 
   changePasswordVisibility() {
@@ -20,7 +21,7 @@ class SignInViewModel extends BaseViewModel{
   }
 
   void navigateToForgotPassword() {
-    _navigationService.navigateTo(Routes.homeView);
+    _navigationService.navigateTo(Routes.recoverPasswordView);
   }
 
   void googleAuth() {

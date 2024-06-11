@@ -5,8 +5,10 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i8;
+import 'package:flutter/material.dart' as _i9;
 import 'package:flutter/material.dart';
+import 'package:smartpay/ui/screens/create_new_password/create_new_password_view.dart'
+    as _i8;
 import 'package:smartpay/ui/screens/home/home_view.dart' as _i2;
 import 'package:smartpay/ui/screens/onboarding/onboarding_view.dart' as _i4;
 import 'package:smartpay/ui/screens/recover_password/recover_password_view.dart'
@@ -16,7 +18,7 @@ import 'package:smartpay/ui/screens/startup/startup_view.dart' as _i3;
 import 'package:smartpay/ui/screens/verify_identity/verify_identity_view.dart'
     as _i7;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i9;
+import 'package:stacked_services/stacked_services.dart' as _i10;
 
 class Routes {
   static const homeView = '/home-view';
@@ -31,6 +33,8 @@ class Routes {
 
   static const verifyIdentityView = '/verify-identity-view';
 
+  static const createNewPasswordView = '/create-new-password-view';
+
   static const all = <String>{
     homeView,
     startupView,
@@ -38,6 +42,7 @@ class Routes {
     signInView,
     recoverPasswordView,
     verifyIdentityView,
+    createNewPasswordView,
   };
 }
 
@@ -67,42 +72,52 @@ class StackedRouter extends _i1.RouterBase {
       Routes.verifyIdentityView,
       page: _i7.VerifyIdentityView,
     ),
+    _i1.RouteDef(
+      Routes.createNewPasswordView,
+      page: _i8.CreateNewPasswordView,
+    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.HomeView: (data) {
-      return _i8.MaterialPageRoute<dynamic>(
+      return _i9.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.HomeView(),
         settings: data,
       );
     },
     _i3.StartupView: (data) {
-      return _i8.MaterialPageRoute<dynamic>(
+      return _i9.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.StartupView(),
         settings: data,
       );
     },
     _i4.OnboardingView: (data) {
-      return _i8.MaterialPageRoute<dynamic>(
+      return _i9.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.OnboardingView(),
         settings: data,
       );
     },
     _i5.SignInView: (data) {
-      return _i8.MaterialPageRoute<dynamic>(
+      return _i9.MaterialPageRoute<dynamic>(
         builder: (context) => const _i5.SignInView(),
         settings: data,
       );
     },
     _i6.RecoverPasswordView: (data) {
-      return _i8.MaterialPageRoute<dynamic>(
+      return _i9.MaterialPageRoute<dynamic>(
         builder: (context) => const _i6.RecoverPasswordView(),
         settings: data,
       );
     },
     _i7.VerifyIdentityView: (data) {
-      return _i8.MaterialPageRoute<dynamic>(
+      return _i9.MaterialPageRoute<dynamic>(
         builder: (context) => const _i7.VerifyIdentityView(),
+        settings: data,
+      );
+    },
+    _i8.CreateNewPasswordView: (data) {
+      return _i9.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i8.CreateNewPasswordView(),
         settings: data,
       );
     },
@@ -115,7 +130,7 @@ class StackedRouter extends _i1.RouterBase {
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
 }
 
-extension NavigatorStateExtension on _i9.NavigationService {
+extension NavigatorStateExtension on _i10.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -200,6 +215,20 @@ extension NavigatorStateExtension on _i9.NavigationService {
         transition: transition);
   }
 
+  Future<dynamic> navigateToCreateNewPasswordView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.createNewPasswordView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
   Future<dynamic> replaceWithHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -278,6 +307,20 @@ extension NavigatorStateExtension on _i9.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.verifyIdentityView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithCreateNewPasswordView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.createNewPasswordView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,

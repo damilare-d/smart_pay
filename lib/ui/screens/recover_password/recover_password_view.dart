@@ -18,23 +18,26 @@ class RecoverPasswordView extends StatelessWidget {
       viewModelBuilder: ()=> RecoverPasswordViewModel(), 
       builder: (BuildContext context, RecoverPasswordViewModel viewModel, Widget? child) { 
         return Scaffold(
-          body: Column(
-            children: [
-              Container(
-                width: 90,
-                height: 76,
-                child: SvgPicture.asset("assets/svgs/padlock.svg"),
-              ),
-              Text("Password Recovery",  style: TextStyles(ThemeNotifier())
-                  .titleLarge
-                  .copyWith(color: kcAccentLightColor2),),
-              const SizedBox(height: 12,),
-              const Text("Enter your registered email below to receive password instructions"),
-              const SizedBox(height: 32,),
-              AuthField(controller: viewModel.emailController, hintText: "Email"),
-              Container(),
-              CustomButton(text: "Send me email", onPressed: viewModel.sendVerificationMail)
-            ],
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.all(24),
+            child: Column(
+              children: [
+                Container(
+                  width: 90,
+                  height: 76,
+                  child: SvgPicture.asset("assets/svgs/padlock.svg"),
+                ),
+                Text("Password Recovery",  style: TextStyles(ThemeNotifier())
+                    .titleLarge
+                    .copyWith(color: kcAccentLightColor2),),
+                const SizedBox(height: 12,),
+                const Text("Enter your registered email below to receive password instructions"),
+                const SizedBox(height: 32,),
+                AuthField(controller: viewModel.emailController, hintText: "Email"),
+                Container(),
+                CustomButton(text: "Send me email", onPressed: viewModel.sendVerificationMail)
+              ],
+            ),
           ),
         );
       },);
