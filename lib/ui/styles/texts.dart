@@ -5,7 +5,7 @@ import 'color.dart';
 import 'theme_manager.dart';
 
 final String _fontFamily =
-    GoogleFonts.outfit().fontFamily ?? "Helvetica, Arial, sans-serif";
+    GoogleFonts.roboto().fontFamily ?? "Helvetica, Arial, sans-serif";
 final String fontFamily2 =
     GoogleFonts.poppins().fontFamily ?? "Helvetica, Arial, serif";
 
@@ -46,8 +46,9 @@ final TextStyle _headlineSmall = TextStyle(
 final TextStyle _titleLarge = TextStyle(
   fontFamily: _fontFamily,
   fontWeight: FontWeight.w600,
-  fontSize: 20,
+  fontSize: 24,
   height: 20 / 20,
+  color: const Color(0xff111827)
 );
 
 final TextStyle _titleMedium = TextStyle(
@@ -80,6 +81,8 @@ final TextStyle _bodySmall = TextStyle(
   fontFamily: _fontFamily,
   fontWeight: FontWeight.w400,
   fontSize: 14,
+  color: const Color(0xff6B7280)
+
 );
 
 final TextStyle _labelLarge = TextStyle(
