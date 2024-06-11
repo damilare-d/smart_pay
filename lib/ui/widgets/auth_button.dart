@@ -14,7 +14,7 @@ class AuthButton extends StatelessWidget {
     Key? key,
     required this.svgAsset,
     required this.onPressed,
-    this.width = 48.0,
+    this.width = 150,
     this.height = 48.0,
     this.backgroundColor,
     this.padding,
@@ -30,7 +30,7 @@ class AuthButton extends StatelessWidget {
         height: height,
         padding: padding,
         decoration: BoxDecoration(
-          color: backgroundColor ?? Colors.transparent,
+          color: backgroundColor ?? const Color(0xffE5E7EB),
           borderRadius: BorderRadius.circular(borderRadius),
         ),
         child: Center(
