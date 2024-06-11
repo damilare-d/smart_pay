@@ -111,7 +111,7 @@ class SignInView extends StatelessWidget {
                                 ),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
-                                    print('Sign up tapped');
+                                    viewModel.signUp();
                                   },
                               ),
                             ],

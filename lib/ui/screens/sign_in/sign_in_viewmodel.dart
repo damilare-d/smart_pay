@@ -29,4 +29,8 @@ class SignInViewModel extends BaseViewModel{
 
   void appleAuth() {
   }
+
+  void signUp() {
+    _navigationService.navigateTo(Routes.recoverPasswordView);
+  }
 }
