@@ -1,11 +1,14 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:smartpay/ui/screens/sign_up/sign_up_viewmodel.dart';
+import 'package:smartpay/ui/styles/colors.dart';
 import 'package:smartpay/ui/widgets/auth_button.dart';
 import 'package:smartpay/ui/widgets/auth_field.dart';
 import 'package:smartpay/ui/widgets/custom_appbar.dart';
 import 'package:smartpay/ui/widgets/custom_button.dart';
 import 'package:stacked/stacked.dart';
+
+import '../../styles/style.dart';
 
 class SignUpView extends StatelessWidget {
   const SignUpView({super.key});
@@ -21,34 +24,43 @@ class SignUpView extends StatelessWidget {
             body: Column(
               children: [
                 RichText(
-                  text: const TextSpan(
+                  text: TextSpan(
                     text: 'Create a ',
-                    style: TextStyle(color: Colors.black, fontSize: 24.0),
+                    style: TextStyles(ThemeNotifier())
+                        .titleLarge
+                        .copyWith(color: kcAccentLightColor2),
                     children: <TextSpan>[
                       TextSpan(
                         text: 'Smartpay',
-                        style: TextStyle(
-                          color: Color(0xFF0A6375),
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: TextStyles(ThemeNotifier())
+                            .titleLarge
+                            .copyWith(color: kcAccentLightColor1),
                       ),
                       TextSpan(
                         text: '\naccount',
-                        style: TextStyle(color: Colors.black, fontSize: 24.0),
+                        style: TextStyles(ThemeNotifier())
+                            .titleLarge
+                            .copyWith(color: kcAccentLightColor2),
                       ),
                     ],
                   ),
                   textAlign: TextAlign.center,
                 ),
-                const SizedBox(height: 32,),
+                const SizedBox(
+                  height: 32,
+                ),
                 AuthField(
                   controller: viewModel.emailController,
                   hintText: 'Email',
                   borderRadius: BorderRadius.circular(16),
                 ),
-                const SizedBox(height: 24,),
+                const SizedBox(
+                  height: 24,
+                ),
                 CustomButton(text: "Sign Up", onPressed: viewModel.signUp),
-                const SizedBox(height: 32,),
+                const SizedBox(
+                  height: 32,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -61,12 +73,17 @@ class SignUpView extends StatelessWidget {
                         onPressed: viewModel.appleAuth),
                   ],
                 ),
-                const SizedBox(height: 80,),
+                const SizedBox(
+                  height: 80,
+                ),
                 Center(
                   child: RichText(
                     text: TextSpan(
                       text: 'Already have an account? ',
-                      style: const TextStyle(color: Colors.grey, fontSize: 16.0, fontWeight: FontWeight.w400),
+                      style: const TextStyle(
+                          color: Colors.grey,
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w400),
                       children: <TextSpan>[
                         TextSpan(
                           text: 'Sign In',
@@ -83,7 +100,6 @@ class SignUpView extends StatelessWidget {
                     ),
                   ),
                 ),
-
               ],
             ),
           );
