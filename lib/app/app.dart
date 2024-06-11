@@ -7,8 +7,10 @@ import 'package:stacked_services/stacked_services.dart';
 
 import '../ui/bottom_sheets/notice/notice_sheet.dart';
 import '../ui/dialogs/info_alert/info_alert_dialog.dart';
+import '../ui/screens/authentication/authentication_view.dart';
 import '../ui/screens/home/home_view.dart';
 import '../ui/screens/sign_in/sign_in_view.dart';
+import '../ui/screens/sign_up/sign_up_view.dart';
 import '../ui/screens/startup/startup_view.dart';
 import '../ui/screens/verify_identity/verify_identity_view.dart';
 import '../ui/styles/theme_manager.dart';
@@ -23,6 +25,8 @@ import '../ui/styles/theme_manager.dart';
     MaterialRoute(page: RecoverPasswordView),
     MaterialRoute(page: VerifyIdentityView),
     MaterialRoute(page: CreateNewPasswordView),
+    MaterialRoute(page: SignUpView),
+    MaterialRoute(page: AuthenticationView),
     // @stacked-route
   ],
   dependencies: [
