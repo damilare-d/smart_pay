@@ -1,4 +1,6 @@
+import 'package:smartpay/ui/screens/create_new_password/create_new_password_view.dart';
 import 'package:smartpay/ui/screens/onboarding/onboarding_view.dart';
+import 'package:smartpay/ui/screens/recover_password/recover_password_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -8,6 +10,7 @@ import '../ui/dialogs/info_alert/info_alert_dialog.dart';
 import '../ui/screens/home/home_view.dart';
 import '../ui/screens/sign_in/sign_in_view.dart';
 import '../ui/screens/startup/startup_view.dart';
+import '../ui/screens/verify_identity/verify_identity_view.dart';
 import '../ui/styles/theme_manager.dart';
 // @stacked-import
 
@@ -17,6 +20,9 @@ import '../ui/styles/theme_manager.dart';
     MaterialRoute(page: StartupView),
     MaterialRoute(page: OnboardingView),
     MaterialRoute(page: SignInView),
+    MaterialRoute(page: RecoverPasswordView),
+    MaterialRoute(page: VerifyIdentityView),
+    MaterialRoute(page: CreateNewPasswordView),
     // @stacked-route
   ],
   dependencies: [
