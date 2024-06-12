@@ -1,53 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:pin_code_text_field/pin_code_text_field.dart';
-import 'package:smartpay/ui/screens/authentication/authentication_viewmodel.dart';
+import 'package:smartpay/ui/screens/create_pin/create_pin_viewmodel.dart';
 import 'package:smartpay/ui/styles/colors.dart';
+import 'package:smartpay/ui/styles/style.dart';
 import 'package:smartpay/ui/widgets/custom_appbar.dart';
+import 'package:smartpay/ui/widgets/custom_button.dart';
 import 'package:stacked/stacked.dart';
 
-import '../../styles/style.dart';
-import '../../widgets/custom_button.dart';
-
-class AuthenticationView extends StatelessWidget {
-  const AuthenticationView({super.key});
+class CreatePinView extends StatelessWidget {
+  const CreatePinView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<AuthenticationViewModel>.reactive(
-        viewModelBuilder:()=> AuthenticationViewModel(),
-        builder: (BuildContext context, AuthenticationViewModel viewModel, Widget? child){
-          return  Scaffold(
+    return ViewModelBuilder<CreatePinViewModel>.reactive(
+        viewModelBuilder: () => CreatePinViewModel(),
+        builder: (BuildContext context, CreatePinViewModel viewModel,
+            Widget? child) {
+          return Scaffold(
             appBar: const CustomAppBar(),
             body: SingleChildScrollView(
               padding: const EdgeInsets.all(24),
               child: Column(
                 children: [
                   Text(
-                    "Verify it’s you",
+                    "Set your PIN code",
                     style: TextStyles(ThemeNotifier())
                         .titleLarge
                         .copyWith(color: kcAccentLightColor2),
                   ),
-                const SizedBox(height: 12,),
-                RichText(
-                  text: TextSpan(
-                    text: 'We send a code to ',
-                    style: TextStyles(ThemeNotifier()).bodySmall.copyWith(color: kcAccentLightColor4),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: '( *****@mail.com )',
-                        style: TextStyles(ThemeNotifier()).bodySmall.copyWith(
-                          color: kcAccentLightColor4,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      TextSpan(
-                        text: '. Enter it here to verify your identity',
-                        style: TextStyles(ThemeNotifier()).bodySmall.copyWith(color: kcAccentLightColor4),
-                      ),
-                    ],
+                  const SizedBox(
+                    height: 12,
                   ),
-                ),
+                  Text(
+                    "Welcome back, Sign in to your account",
+                    style: TextStyles(ThemeNotifier())
+                        .bodySmall
+                        .copyWith(color: kcAccentLightColor4),
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
                     child: Row(
@@ -60,7 +49,6 @@ class AuthenticationView extends StatelessWidget {
                           pinBoxColor: const Color(0xffF9FAFB),
                           defaultBorderColor: Colors.transparent,
                           hasTextBorderColor: kcAccentLightColor1,
-
                           pinBoxHeight: 56,
                           pinBoxWidth: 56,
                           onDone: (value) {
@@ -70,10 +58,8 @@ class AuthenticationView extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 32,),
-                  const Text("Resend Code 30 secs"),
-                  Container(),
-                  CustomButton(text: 'Confirm', onPressed: viewModel.confirmOTP,)
+                  const SizedBox(height: 120,),
+                  CustomButton(text: "Create PIN", onPressed: viewModel.createPin)
                 ],
               ),
             ),

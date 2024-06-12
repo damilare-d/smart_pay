@@ -5,12 +5,13 @@
 // **************************************************************************
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:flutter/material.dart' as _i12;
+import 'package:flutter/material.dart' as _i13;
 import 'package:flutter/material.dart';
 import 'package:smartpay/ui/screens/authentication/authentication_view.dart'
     as _i10;
 import 'package:smartpay/ui/screens/create_new_password/create_new_password_view.dart'
     as _i8;
+import 'package:smartpay/ui/screens/create_pin/create_pin_view.dart' as _i12;
 import 'package:smartpay/ui/screens/home/home_view.dart' as _i2;
 import 'package:smartpay/ui/screens/identification/identification_view.dart'
     as _i11;
@@ -23,7 +24,7 @@ import 'package:smartpay/ui/screens/startup/startup_view.dart' as _i3;
 import 'package:smartpay/ui/screens/verify_identity/verify_identity_view.dart'
     as _i7;
 import 'package:stacked/stacked.dart' as _i1;
-import 'package:stacked_services/stacked_services.dart' as _i13;
+import 'package:stacked_services/stacked_services.dart' as _i14;
 
 class Routes {
   static const homeView = '/home-view';
@@ -46,6 +47,8 @@ class Routes {
 
   static const identificationView = '/identification-view';
 
+  static const createPinView = '/create-pin-view';
+
   static const all = <String>{
     homeView,
     startupView,
@@ -57,6 +60,7 @@ class Routes {
     signUpView,
     authenticationView,
     identificationView,
+    createPinView,
   };
 }
 
@@ -102,66 +106,76 @@ class StackedRouter extends _i1.RouterBase {
       Routes.identificationView,
       page: _i11.IdentificationView,
     ),
+    _i1.RouteDef(
+      Routes.createPinView,
+      page: _i12.CreatePinView,
+    ),
   ];
 
   final _pagesMap = <Type, _i1.StackedRouteFactory>{
     _i2.HomeView: (data) {
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i13.MaterialPageRoute<dynamic>(
         builder: (context) => const _i2.HomeView(),
         settings: data,
       );
     },
     _i3.StartupView: (data) {
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i13.MaterialPageRoute<dynamic>(
         builder: (context) => const _i3.StartupView(),
         settings: data,
       );
     },
     _i4.OnboardingView: (data) {
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i13.MaterialPageRoute<dynamic>(
         builder: (context) => const _i4.OnboardingView(),
         settings: data,
       );
     },
     _i5.SignInView: (data) {
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i13.MaterialPageRoute<dynamic>(
         builder: (context) => const _i5.SignInView(),
         settings: data,
       );
     },
     _i6.RecoverPasswordView: (data) {
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i13.MaterialPageRoute<dynamic>(
         builder: (context) => const _i6.RecoverPasswordView(),
         settings: data,
       );
     },
     _i7.VerifyIdentityView: (data) {
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i13.MaterialPageRoute<dynamic>(
         builder: (context) => const _i7.VerifyIdentityView(),
         settings: data,
       );
     },
     _i8.CreateNewPasswordView: (data) {
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i13.MaterialPageRoute<dynamic>(
         builder: (context) => const _i8.CreateNewPasswordView(),
         settings: data,
       );
     },
     _i9.SignUpView: (data) {
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i13.MaterialPageRoute<dynamic>(
         builder: (context) => const _i9.SignUpView(),
         settings: data,
       );
     },
     _i10.AuthenticationView: (data) {
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i13.MaterialPageRoute<dynamic>(
         builder: (context) => const _i10.AuthenticationView(),
         settings: data,
       );
     },
     _i11.IdentificationView: (data) {
-      return _i12.MaterialPageRoute<dynamic>(
+      return _i13.MaterialPageRoute<dynamic>(
         builder: (context) => const _i11.IdentificationView(),
+        settings: data,
+      );
+    },
+    _i12.CreatePinView: (data) {
+      return _i13.MaterialPageRoute<dynamic>(
+        builder: (context) => const _i12.CreatePinView(),
         settings: data,
       );
     },
@@ -174,7 +188,7 @@ class StackedRouter extends _i1.RouterBase {
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
 }
 
-extension NavigatorStateExtension on _i13.NavigationService {
+extension NavigatorStateExtension on _i14.NavigationService {
   Future<dynamic> navigateToHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -315,6 +329,20 @@ extension NavigatorStateExtension on _i13.NavigationService {
         transition: transition);
   }
 
+  Future<dynamic> navigateToCreatePinView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return navigateTo<dynamic>(Routes.createPinView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
   Future<dynamic> replaceWithHomeView([
     int? routerId,
     bool preventDuplicates = true,
@@ -449,6 +477,20 @@ extension NavigatorStateExtension on _i13.NavigationService {
         transition,
   ]) async {
     return replaceWith<dynamic>(Routes.identificationView,
+        id: routerId,
+        preventDuplicates: preventDuplicates,
+        parameters: parameters,
+        transition: transition);
+  }
+
+  Future<dynamic> replaceWithCreatePinView([
+    int? routerId,
+    bool preventDuplicates = true,
+    Map<String, String>? parameters,
+    Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
+        transition,
+  ]) async {
+    return replaceWith<dynamic>(Routes.createPinView,
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
