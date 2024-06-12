@@ -13,6 +13,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
   gap: ^3.0.1
   google_fonts: ^6.2.1
+  pin_code_text_field: ^1.8.0
   shared_preferences: ^2.2.3
   stacked: ^3.4.0
   stacked_services: ^1.1.0
