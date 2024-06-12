@@ -4,6 +4,7 @@ import 'package:smartpay/ui/screens/verify_identity/verify_identity_viewmodel.da
 import 'package:smartpay/ui/styles/colors.dart';
 import 'package:smartpay/ui/styles/style.dart';
 import 'package:smartpay/ui/widgets/custom_button.dart';
+import 'package:smartpay/ui/widgets/email_card.dart';
 import 'package:stacked/stacked.dart';
 
 class VerifyIdentityView extends StatelessWidget {
@@ -22,21 +23,43 @@ class VerifyIdentityView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
+                  const SizedBox(height: 32,),
+                  SizedBox(
                     width: 90,
                     height: 76,
                     child: SvgPicture.asset("assets/svgs/account.svg"),
                   ),
+                  const SizedBox(height: 24,),
                   Text("Verify your identity", style: TextStyles(ThemeNotifier())
                       .titleLarge
                       .copyWith(color: kcAccentLightColor2),),
                   const SizedBox(height: 12,),
-                  const Text("Where would you like Smartpay to send your security code?"),
+                  RichText(
+                    text: TextSpan(
+                      text: 'Where would you like',
+                      style: TextStyles(ThemeNotifier())
+                          .bodySmall
+                          .copyWith(color: kcAccentLightColor2),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: ' Smartpay ',
+                          style: TextStyles(ThemeNotifier())
+                              .bodySmall
+                              .copyWith(color: kcAccentLightColor1),),
+                        TextSpan(
+                          text: 'send your security code?',
+                          style: TextStyles(ThemeNotifier())
+                              .bodySmall
+                              .copyWith(color: kcAccentLightColor2),
+                        ),
+                      ],
+                    ),
+                    textAlign: TextAlign.start,
+                  ),
+
                   const SizedBox(height: 32,),
 
-                  /// todo
-                  /// create a list tile ....
-
+                 const EmailCard(title: '', subtitle: '',),
 
                   Container(),
                   CustomButton(text: "Continue", onPressed: viewModel.verifyIdentity)

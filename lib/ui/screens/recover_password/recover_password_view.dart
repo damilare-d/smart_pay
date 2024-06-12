@@ -21,19 +21,23 @@ class RecoverPasswordView extends StatelessWidget {
           body: SingleChildScrollView(
             padding: const EdgeInsets.all(24),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
+                const SizedBox(height: 32,),
+                SizedBox(
                   width: 90,
                   height: 76,
                   child: SvgPicture.asset("assets/svgs/padlock.svg"),
                 ),
+                const SizedBox(height: 24,),
                 Text("Password Recovery",  style: TextStyles(ThemeNotifier())
                     .titleLarge
                     .copyWith(color: kcAccentLightColor2),),
                 const SizedBox(height: 12,),
                 const Text("Enter your registered email below to receive password instructions"),
                 const SizedBox(height: 32,),
-                AuthField(controller: viewModel.emailController, hintText: "Email"),
+                AuthField(controller: viewModel.emailController, hintText: "Email", borderRadius: BorderRadius.circular(16),),
+                 const SizedBox(height: 82,),
                 Container(),
                 CustomButton(text: "Send me email", onPressed: viewModel.sendVerificationMail)
               ],

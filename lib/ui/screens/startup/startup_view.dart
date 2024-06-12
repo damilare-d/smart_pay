@@ -10,7 +10,7 @@ import '../../styles/style.dart';
 import 'startup_viewmodel.dart';
 
 class StartupView extends StackedView<StartupViewModel> {
-  const StartupView({Key? key}) : super(key: key);
+  const StartupView({super.key});
 
   @override
   Widget builder(
@@ -21,6 +21,8 @@ class StartupView extends StackedView<StartupViewModel> {
     return  Scaffold(
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset("assets/svgs/smart_pay_logo.svg",width: 72, height: 72,),
            const SizedBox(height: 16,),
