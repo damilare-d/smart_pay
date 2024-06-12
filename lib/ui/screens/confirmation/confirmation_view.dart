@@ -21,30 +21,33 @@ class ConfirmationView extends StatelessWidget {
         ){
           return Scaffold(
             body: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SvgPicture.asset("assetName"),
-                  const SizedBox(height: 32,),
-                  Text(
-                    "Congratulations ${userName ?? ""}",
-                    style: TextStyles(ThemeNotifier())
-                        .titleLarge
-                        .copyWith(color: kcAccentLightColor2),
-                    textAlign: TextAlign.center,
-                  ),
-                 const SizedBox(height: 12,),
-                  Text(
-                    "You’ve completed the onboarding,you can start using",
-                    style: TextStyles(ThemeNotifier())
-                        .bodySmall
-                        .copyWith(color: kcAccentLightColor4),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 32,),
-                  CustomButton(text: "Get Started", onPressed: viewModel.navigateToHome)
+              child: Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset("assets/images/thumbs_up.png", width: 140, height: 134,),
+                    const SizedBox(height: 32,),
+                    Text(
+                      "Congratulations ${userName ?? ""}",
+                      style: TextStyles(ThemeNotifier())
+                          .titleLarge
+                          .copyWith(color: kcAccentLightColor2),
+                      textAlign: TextAlign.center,
+                    ),
+                   const SizedBox(height: 12,),
+                    Text(
+                      "You’ve completed the onboarding,you can start using",
+                      style: TextStyles(ThemeNotifier())
+                          .bodySmall
+                          .copyWith(color: kcAccentLightColor4),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 32,),
+                    CustomButton(text: "Get Started", onPressed: viewModel.navigateToHome)
 
-                ],
+                  ],
+                ),
               ),
             ),
           );

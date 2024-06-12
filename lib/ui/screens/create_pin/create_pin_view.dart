@@ -21,6 +21,7 @@ class CreatePinView extends StatelessWidget {
             body: SingleChildScrollView(
               padding: const EdgeInsets.all(24),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     "Set your PIN code",
@@ -32,31 +33,32 @@ class CreatePinView extends StatelessWidget {
                     height: 12,
                   ),
                   Text(
-                    "Welcome back, Sign in to your account",
+                    "We use state-of-the-art security measures to protect your information at all times",
                     style: TextStyles(ThemeNotifier())
                         .bodySmall
                         .copyWith(color: kcAccentLightColor4),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        PinCodeTextField(
-                          maxLength: 5,
-                          pinBoxRadius: 12,
-                          pinBoxBorderWidth: 1,
-                          pinBoxColor: const Color(0xffF9FAFB),
-                          defaultBorderColor: Colors.transparent,
-                          hasTextBorderColor: kcAccentLightColor1,
-                          pinBoxHeight: 56,
-                          pinBoxWidth: 56,
-                          onDone: (value) {
-                            //navigator.navigateTo(Routes.changePasswordScreen);
-                          },
-                        ),
-                      ],
-                    ),
+                 const SizedBox(height: 32,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      PinCodeTextField(
+                        maxLength: 5,
+                        pinBoxRadius: 12,
+                        pinBoxBorderWidth: 1,
+                        pinBoxColor: const Color(0xffF9FAFB),
+                        defaultBorderColor: Colors.transparent,
+                        hasTextBorderColor: kcAccentLightColor1,
+                        controller: viewModel.pinCodeController,
+                        pinTextStyle: TextStyles(ThemeNotifier()).titleLarge.copyWith(fontWeight: FontWeight.w700),
+
+                        pinBoxHeight: 56,
+                        pinBoxWidth: 56,
+                        onDone: (value) {
+                          viewModel.createPin;
+                        },
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 120,),
                   CustomButton(text: "Create PIN", onPressed: viewModel.createPin)

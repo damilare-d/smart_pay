@@ -5,6 +5,7 @@ import 'package:smartpay/ui/styles/colors.dart';
 import 'package:smartpay/ui/widgets/custom_appbar.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../../app/app.router.dart';
 import '../../styles/style.dart';
 import '../../widgets/custom_button.dart';
 
@@ -21,6 +22,7 @@ class AuthenticationView extends StatelessWidget {
             body: SingleChildScrollView(
               padding: const EdgeInsets.all(24),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     "Verify it’s you",
@@ -37,8 +39,10 @@ class AuthenticationView extends StatelessWidget {
                       TextSpan(
                         text: '( *****@mail.com )',
                         style: TextStyles(ThemeNotifier()).bodySmall.copyWith(
-                          color: kcAccentLightColor4,
-                          fontWeight: FontWeight.bold,
+                          color: kcAccentLightColor2,
+                           fontWeight: FontWeight.w500
+
+                          ,
                         ),
                       ),
                       TextSpan(
@@ -48,31 +52,31 @@ class AuthenticationView extends StatelessWidget {
                     ],
                   ),
                 ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        PinCodeTextField(
-                          maxLength: 5,
-                          pinBoxRadius: 12,
-                          pinBoxBorderWidth: 1,
-                          pinBoxColor: const Color(0xffF9FAFB),
-                          defaultBorderColor: Colors.transparent,
-                          hasTextBorderColor: kcAccentLightColor1,
+                 const SizedBox(height: 32,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      PinCodeTextField(
+                        maxLength: 5,
+                        pinBoxRadius: 12,
+                        pinBoxBorderWidth: 1,
+                        pinBoxColor: const Color(0xffF9FAFB),
+                        defaultBorderColor: Colors.transparent,
+                        hasTextBorderColor: kcAccentLightColor1,
+                        controller: viewModel.pinCodeController,
+                        pinTextStyle: TextStyles(ThemeNotifier()).titleLarge.copyWith(fontWeight: FontWeight.w700),
 
-                          pinBoxHeight: 56,
-                          pinBoxWidth: 56,
-                          onDone: (value) {
-                            //navigator.navigateTo(Routes.changePasswordScreen);
-                          },
-                        ),
-                      ],
-                    ),
+                        pinBoxHeight: 56,
+                        pinBoxWidth: 56,
+                        onDone: (value) {
+                          viewModel.confirmOTP;
+                        },
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 32,),
-                  const Text("Resend Code 30 secs"),
-                  Container(),
+                  const Center(child:  Text("Resend Code 30 secs")),
+                  const SizedBox(height: 62,),
                   CustomButton(text: 'Confirm', onPressed: viewModel.confirmOTP,)
                 ],
               ),

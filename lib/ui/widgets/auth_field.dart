@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:smartpay/ui/styles/colors.dart';
 
@@ -19,23 +17,23 @@ class AuthField extends StatelessWidget {
   final String? labelText;
   final int? maxLines;
 
-  const AuthField(
-      {Key? key,
-      this.changeVisibilty,
-      this.textInputType,
-      required this.controller,
-      this.onChanged,
-      this.isVisible = true,
-      this.isBorderColor = false,
-      this.borderColor,
-      required this.hintText,
-      this.labelText,
-      this.isPassword = false,
-      this.borderRadius,
-      this.suffixIcon,
-      this.maxLines,
-      this.prefixIcon})
-      : super(key: key);
+  const AuthField({
+    Key? key,
+    this.changeVisibilty,
+    this.textInputType,
+    required this.controller,
+    this.onChanged,
+    this.isVisible = true,
+    this.isBorderColor = false,
+    this.borderColor,
+    required this.hintText,
+    this.labelText,
+    this.isPassword = false,
+    this.borderRadius,
+    this.suffixIcon,
+    this.maxLines,
+    this.prefixIcon,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,16 +41,17 @@ class AuthField extends StatelessWidget {
       children: [
         TextFormField(
           style: const TextStyle(
-            fontWeight: FontWeight.w600,fontSize: 16
-          )
-          ,
+            fontWeight: FontWeight.w600,
+            fontSize: 16,
+            color: Color(0xFF111827),
+            height: 1.5,
+          ),
           keyboardType: textInputType,
-          maxLines: maxLines,
+          maxLines: maxLines ?? 1,
           controller: controller,
           onChanged: onChanged,
           obscureText: isPassword ? isVisible : false,
           decoration: InputDecoration(
-
             filled: true,
             fillColor: const Color(0xffF9FAFB),
             focusedBorder: OutlineInputBorder(
@@ -62,13 +61,14 @@ class AuthField extends StatelessWidget {
               borderRadius: borderRadius ?? BorderRadius.zero,
             ),
             enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(
-                  color: Colors.transparent,
-                ),
-                borderRadius: borderRadius ?? BorderRadius.zero),
+              borderSide: const BorderSide(
+                color: Colors.transparent,
+              ),
+              borderRadius: borderRadius ?? BorderRadius.zero,
+            ),
             hintText: hintText,
-            labelText: labelText ?? "",
-            // hintStyle: Theme.of(context).textTheme.labelMedium,
+            labelText: (labelText != null && labelText!.isNotEmpty) ? labelText : null,
+            //hintStyle: Theme.of(context).textTheme.labelMedium,
             prefixIcon: prefixIcon,
             suffixIcon: suffixIcon,
           ),

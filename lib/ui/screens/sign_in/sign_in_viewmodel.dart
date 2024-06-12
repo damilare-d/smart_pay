@@ -31,6 +31,6 @@ class SignInViewModel extends BaseViewModel{
   }
 
   void signUp() {
-    _navigationService.navigateTo(Routes.recoverPasswordView);
+    _navigationService.navigateTo(Routes.signUpView);
   }
 }

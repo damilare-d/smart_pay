@@ -1,10 +1,11 @@
-
 import 'package:flutter/material.dart';
+import 'package:smartpay/ui/styles/colors.dart';
 import 'package:smartpay/ui/widgets/auth_field.dart';
 import 'package:smartpay/ui/widgets/custom_appbar.dart';
 import 'package:smartpay/ui/widgets/custom_button.dart';
 import 'package:stacked/stacked.dart';
 
+import '../../styles/style.dart';
 import 'create_new_password_viewmodel.dart';
 
 class CreateNewPasswordView extends StatelessWidget {
@@ -12,22 +13,35 @@ class CreateNewPasswordView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  ViewModelBuilder<CreateNewPasswordViewModel>.reactive(
-        viewModelBuilder: ()=> CreateNewPasswordViewModel(),
-        builder: (
-        BuildContext context, CreateNewPasswordViewModel viewModel, Widget? child
-
-            ){
+    return ViewModelBuilder<CreateNewPasswordViewModel>.reactive(
+        viewModelBuilder: () => CreateNewPasswordViewModel(),
+        builder: (BuildContext context, CreateNewPasswordViewModel viewModel,
+            Widget? child) {
           return Scaffold(
             appBar: const CustomAppBar(),
             body: SingleChildScrollView(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(24.0),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text("data"),
-                  const SizedBox(height: 12,),
-                  const Text("Please, enter a new password below different from the previous password"),
-                  const SizedBox(height: 32,),
+                  Text(
+                    "Create New Password",
+                    style: TextStyles(ThemeNotifier())
+                        .titleLarge
+                        .copyWith(color: kcAccentLightColor2),
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Text(
+                    "Please, enter a new password below different from the previous password",
+                    style: TextStyles(ThemeNotifier())
+                        .bodySmall
+                        .copyWith(color: kcAccentLightColor4),
+                  ),
+                  const SizedBox(
+                    height: 32,
+                  ),
                   AuthField(
                     controller: viewModel.createPasswordController,
                     hintText: 'Create Password',
@@ -38,7 +52,9 @@ class CreateNewPasswordView extends StatelessWidget {
                     maxLines: 1,
                     changeVisibilty: viewModel.changeCreatePasswordVisibility,
                   ),
-                  const SizedBox(height: 16,),
+                  const SizedBox(
+                    height: 16,
+                  ),
                   AuthField(
                     controller: viewModel.confirmPasswordController,
                     hintText: 'Confirm Password',
@@ -49,14 +65,15 @@ class CreateNewPasswordView extends StatelessWidget {
                     maxLines: 1,
                     changeVisibilty: viewModel.changeConfirmPasswordVisibility,
                   ),
-                  Container(),
-                  CustomButton(text: "Create new password", onPressed: viewModel.createNewPassword)
+                  SizedBox(height: 20,),
 
+                  CustomButton(
+                      text: "Create new password",
+                      onPressed: viewModel.createNewPassword)
                 ],
               ),
             ),
           );
-
         });
   }
 }

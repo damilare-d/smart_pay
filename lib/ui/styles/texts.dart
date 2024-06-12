@@ -47,7 +47,7 @@ final TextStyle _titleLarge = TextStyle(
   fontFamily: _fontFamily,
   fontWeight: FontWeight.w600,
   fontSize: 24,
-  height: 20 / 20,
+  height: 31.2 / 24,
   color: const Color(0xff111827)
 );
 
@@ -80,8 +80,10 @@ final TextStyle _bodyMedium = TextStyle(
 final TextStyle _bodySmall = TextStyle(
   fontFamily: _fontFamily,
   fontWeight: FontWeight.w400,
-  fontSize: 14,
-  color: const Color(0xff6B7280)
+  fontSize: 16,
+  color: const Color(0xff6B7280),
+  height: 24/16,
+  letterSpacing: 0.3
 
 );
 

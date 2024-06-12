@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smartpay/ui/screens/verify_identity/verify_identity_viewmodel.dart';
 import 'package:smartpay/ui/styles/colors.dart';
@@ -18,8 +19,9 @@ class VerifyIdentityView extends StatelessWidget {
         BuildContext context, VerifyIdentityViewModel viewModel, Widget? child
         ){
           return Scaffold(
-            body: SingleChildScrollView(
-              padding: const EdgeInsets.all(24.0),
+            body: Padding(
+              
+              padding: const EdgeInsets.all(24),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -39,33 +41,32 @@ class VerifyIdentityView extends StatelessWidget {
                       text: 'Where would you like',
                       style: TextStyles(ThemeNotifier())
                           .bodySmall
-                          .copyWith(color: kcAccentLightColor2),
+                          .copyWith(color: kcAccentLightColor4),
                       children: <TextSpan>[
                         TextSpan(
                           text: ' Smartpay ',
                           style: TextStyles(ThemeNotifier())
                               .bodySmall
-                              .copyWith(color: kcAccentLightColor1),),
+                              .copyWith(color: kcAccentLightColor1, fontSize: 16),),
                         TextSpan(
                           text: 'send your security code?',
                           style: TextStyles(ThemeNotifier())
                               .bodySmall
-                              .copyWith(color: kcAccentLightColor2),
+                              .copyWith(color: kcAccentLightColor4),
                         ),
                       ],
                     ),
                     textAlign: TextAlign.start,
                   ),
-
+              
                   const SizedBox(height: 32,),
-
+              
                  const EmailCard(title: '', subtitle: '',),
-
-                  Container(),
+                 const Spacer(),
                   CustomButton(text: "Continue", onPressed: viewModel.verifyIdentity)
-                 
-
-
+              
+              
+              
                 ],
               ),
             ),

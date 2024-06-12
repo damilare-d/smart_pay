@@ -25,6 +25,7 @@ class IdentificationView extends StatelessWidget {
             body: SingleChildScrollView(
               padding: const EdgeInsets.all(24),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   RichText(
                     text: TextSpan(
@@ -40,14 +41,14 @@ class IdentificationView extends StatelessWidget {
                               .copyWith(color: kcAccentLightColor2),
                         ),
                         TextSpan(
-                          text: 'yourself',
+                          text: ' yourself',
                           style: TextStyles(ThemeNotifier())
                               .titleLarge
                               .copyWith(color: kcAccentLightColor1),
                         ),
                       ],
                     ),
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.start,
                   ),
                   const SizedBox(height: 32,),
                   AuthField(
