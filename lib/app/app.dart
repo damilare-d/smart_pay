@@ -1,3 +1,4 @@
+import 'package:smartpay/ui/screens/confirmation/confirmation_view.dart';
 import 'package:smartpay/ui/screens/create_new_password/create_new_password_view.dart';
 import 'package:smartpay/ui/screens/identification/identification_view.dart';
 import 'package:smartpay/ui/screens/onboarding/onboarding_view.dart';
@@ -31,6 +32,7 @@ import '../ui/styles/theme_manager.dart';
     MaterialRoute(page: AuthenticationView),
     MaterialRoute(page: IdentificationView),
     MaterialRoute(page: CreatePinView),
+    MaterialRoute(page: ConfirmationView),
     // @stacked-route
   ],
   dependencies: [
