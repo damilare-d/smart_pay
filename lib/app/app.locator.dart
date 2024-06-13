@@ -12,6 +12,8 @@ import 'package:stacked_services/src/navigation/navigation_service.dart';
 import 'package:stacked_services/src/snackbar/snackbar_service.dart';
 import 'package:stacked_shared/stacked_shared.dart';
 
+import '../core/services/api_service.dart';
+import '../core/services/auth_repository.dart';
 import '../ui/styles/theme_manager.dart';
 
 final locator = StackedLocator.instance;
@@ -30,4 +32,6 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => NavigationService());
   locator.registerLazySingleton(() => SnackbarService());
   locator.registerLazySingleton(() => ThemeNotifier());
+  locator.registerLazySingleton(() => AuthRepository());
+  locator.registerLazySingleton(() => ApiService());
 }

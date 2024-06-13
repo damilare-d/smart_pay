@@ -1,9 +1,11 @@
+import 'package:smartpay/app/app.locator.dart';
+
 import 'api_service.dart';
 import 'package:smartpay/core/models/models.dart';
 
 
 class AuthRepository {
-  final ApiService _apiService = ApiService();
+  final ApiService _apiService = locator<ApiService>();
 
   Future<EmailTokenResponse> requestEmailToken(String email) async {
     return await _apiService.requestEmailToken(EmailTokenRequest(email: email));

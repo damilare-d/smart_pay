@@ -1,3 +1,5 @@
+import 'package:smartpay/core/services/api_service.dart';
+import 'package:smartpay/core/services/auth_repository.dart';
 import 'package:smartpay/ui/screens/confirmation/confirmation_view.dart';
 import 'package:smartpay/ui/screens/create_new_password/create_new_password_view.dart';
 import 'package:smartpay/ui/screens/identification/identification_view.dart';
@@ -41,6 +43,8 @@ import '../ui/styles/theme_manager.dart';
     LazySingleton(classType: NavigationService),
     LazySingleton(classType: SnackbarService),
     LazySingleton(classType: ThemeNotifier),
+    LazySingleton(classType: AuthRepository),
+    LazySingleton(classType: ApiService),
     // @stacked-service
   ],
   bottomsheets: [
