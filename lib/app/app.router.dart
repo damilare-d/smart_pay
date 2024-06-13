@@ -171,8 +171,14 @@ class StackedRouter extends _i1.RouterBase {
       );
     },
     _i10.AuthenticationView: (data) {
+      final args = data.getArgs<AuthenticationViewArguments>(
+        orElse: () => const AuthenticationViewArguments(),
+      );
       return _i14.MaterialPageRoute<dynamic>(
-        builder: (context) => const _i10.AuthenticationView(),
+        builder: (context) => _i10.AuthenticationView(
+            key: args.key,
+            email: args.email,
+            verificationToken: args.verificationToken),
         settings: data,
       );
     },
@@ -205,6 +211,38 @@ class StackedRouter extends _i1.RouterBase {
 
   @override
   Map<Type, _i1.StackedRouteFactory> get pagesMap => _pagesMap;
+}
+
+class AuthenticationViewArguments {
+  const AuthenticationViewArguments({
+    this.key,
+    this.email,
+    this.verificationToken,
+  });
+
+  final _i14.Key? key;
+
+  final String? email;
+
+  final String? verificationToken;
+
+  @override
+  String toString() {
+    return '{"key": "$key", "email": "$email", "verificationToken": "$verificationToken"}';
+  }
+
+  @override
+  bool operator ==(covariant AuthenticationViewArguments other) {
+    if (identical(this, other)) return true;
+    return other.key == key &&
+        other.email == email &&
+        other.verificationToken == verificationToken;
+  }
+
+  @override
+  int get hashCode {
+    return key.hashCode ^ email.hashCode ^ verificationToken.hashCode;
+  }
 }
 
 class ConfirmationViewArguments {
@@ -347,14 +385,19 @@ extension NavigatorStateExtension on _i15.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> navigateToAuthenticationView([
+  Future<dynamic> navigateToAuthenticationView({
+    _i14.Key? key,
+    String? email,
+    String? verificationToken,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return navigateTo<dynamic>(Routes.authenticationView,
+        arguments: AuthenticationViewArguments(
+            key: key, email: email, verificationToken: verificationToken),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
@@ -518,14 +561,19 @@ extension NavigatorStateExtension on _i15.NavigationService {
         transition: transition);
   }
 
-  Future<dynamic> replaceWithAuthenticationView([
+  Future<dynamic> replaceWithAuthenticationView({
+    _i14.Key? key,
+    String? email,
+    String? verificationToken,
     int? routerId,
     bool preventDuplicates = true,
     Map<String, String>? parameters,
     Widget Function(BuildContext, Animation<double>, Animation<double>, Widget)?
         transition,
-  ]) async {
+  }) async {
     return replaceWith<dynamic>(Routes.authenticationView,
+        arguments: AuthenticationViewArguments(
+            key: key, email: email, verificationToken: verificationToken),
         id: routerId,
         preventDuplicates: preventDuplicates,
         parameters: parameters,
