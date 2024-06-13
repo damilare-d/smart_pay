@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:smartpay/app/app.router.dart';
 import 'package:smartpay/app/application.dart';
@@ -18,14 +19,31 @@ class SignInViewModel extends BaseViewModel{
 
   Future<void> login(String email, String password, String deviceName) async {
     setBusy(true);
-   loginResponse = await _authRepository.login(email, password, deviceName);
-    setBusy(false);
-    notifyListeners();
+    try {
+      loginResponse = await _authRepository.login(email, password, deviceName);
+      print(loginResponse?.message);
+    } catch (e) {
+      print("Login error: $e");
+    } finally {
+      setBusy(false);
+      notifyListeners();
+    }
   }
 
 
   void signIn() {
-    _navigationService.navigateTo(Routes.homeView);
+    print(emailController.text);
+    try {
+      login(emailController.text, passwordController.text, "deviceName");
+      if (loginResponse!.status == false) {
+        return;
+      }
+      else{
+        _navigationService.navigateTo(Routes.homeView);
+      }
+    } on Exception catch (e) {
+      print("the error is $e");
+    }
   }
 
   changePasswordVisibility() {
@@ -38,9 +56,11 @@ class SignInViewModel extends BaseViewModel{
   }
 
   void googleAuth() {
+
   }
 
   void appleAuth() {
+
   }
 
   void signUp() {
