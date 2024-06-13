@@ -1,0 +1,7 @@
+
+
+class UserDetailsService {
+
+  String email = "";
+
+}

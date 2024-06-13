@@ -14,6 +14,7 @@ import 'package:stacked_shared/stacked_shared.dart';
 
 import '../core/services/api_service.dart';
 import '../core/services/auth_repository.dart';
+import '../core/services/user_details_service.dart';
 import '../ui/styles/theme_manager.dart';
 
 final locator = StackedLocator.instance;
@@ -34,4 +35,5 @@ Future<void> setupLocator({
   locator.registerLazySingleton(() => ThemeNotifier());
   locator.registerLazySingleton(() => AuthRepository());
   locator.registerLazySingleton(() => ApiService());
+  locator.registerLazySingleton(() => UserDetailsService());
 }
