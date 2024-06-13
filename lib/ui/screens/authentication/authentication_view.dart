@@ -94,6 +94,11 @@ class AuthenticationView extends StatelessWidget {
                 ),
                 const SizedBox(height: 32),
                 const Center(child: Text("Resend Code 30 secs")),
+                 Center(
+                   child: TextButton(onPressed: () { viewModel.showDialog(verificationToken!); },
+                   child: const Text("show pin"),),
+                 ),
+
                 const SizedBox(height: 62),
                 CustomButton(
                   text: 'Confirm',

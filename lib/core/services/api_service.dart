@@ -72,12 +72,13 @@ class ApiService {
   }
 
   Future<LoginResponse> login(LoginRequest request) async {
+
     try {
       final url = Uri.parse('$_baseUrl/auth/login');
       final response = await http.post(
         url,
         headers: {
-          'Accept': 'application/json',
+      "Accept": "*/*",
           'Content-Type': 'application/json',
         },
         body: jsonEncode(request.toJson()),

@@ -19,7 +19,9 @@ class SignUpViewModel extends BaseViewModel {
     try {
       emailTokenResponse = await _authRepository.requestEmailToken(email);
       if (emailTokenResponse?.status == true) {
-        _navigationService.navigateTo(Routes.authenticationView, arguments: emailController.text);
+        _navigationService.navigateTo(Routes.authenticationView,
+            arguments: AuthenticationViewArguments(email: email, verificationToken: emailTokenResponse?.data.token)
+        );
       } else {
         _bottomSheetService.showBottomSheet(
           title: 'Error',
@@ -27,6 +29,7 @@ class SignUpViewModel extends BaseViewModel {
         );
       }
     } catch (e) {
+      print(e);
       _bottomSheetService.showBottomSheet(
         title: 'Error',
         description: 'Error requesting email token: $e',
