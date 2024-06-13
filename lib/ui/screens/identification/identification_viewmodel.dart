@@ -55,6 +55,7 @@ class IdentificationViewModel extends BaseViewModel {
     }
   }
 
+
   void registerDetails() {
     if (fullNameController.text.isEmpty || passwordController.text.isEmpty) {
       _bottomSheetService.showBottomSheet(
@@ -63,6 +64,11 @@ class IdentificationViewModel extends BaseViewModel {
       );
       return;
     }
+    _userDetail.country = "";
+    _userDetail.fullName = fullNameController.text;
+    _userDetail.userName = userNameController.text;
+    _userDetail.password = passwordController.text;
+
     register(
         fullNameController.text,
         userNameController.text,
