@@ -31,14 +31,18 @@ class RegisterResponse {
   final bool status;
   final String message;
   final RegisterData data;
+  final Map<String, List<String>> errors;
 
-  RegisterResponse({required this.status, required this.message, required this.data});
+  RegisterResponse({required this.status, required this.message, required this.data,  required this.errors,});
 
   factory RegisterResponse.fromJson(Map<String, dynamic> json) {
     return RegisterResponse(
       status: json['status'],
       message: json['message'],
       data: RegisterData.fromJson(json['data']),
+      errors: json.containsKey('errors')
+          ? Map<String, List<String>>.from(json['errors'].map((key, value) => MapEntry(key, List<String>.from(value))))
+          : {},
     );
   }
 }
