@@ -50,6 +50,7 @@ class ApiService {
   }
 
   Future<RegisterResponse> register(RegisterRequest request) async {
+    print(request.toJson());
     try {
       final url = Uri.parse('$_baseUrl/auth/register');
       final response = await http.post(
@@ -61,15 +62,20 @@ class ApiService {
         body: jsonEncode(request.toJson()),
       );
 
+      print(response.body);
+
       if (response.statusCode == 200) {
         return RegisterResponse.fromJson(jsonDecode(response.body));
       } else {
-        throw Exception('Failed to register: ${response.reasonPhrase}');
+        final responseBody = jsonDecode(response.body);
+        throw Exception('Failed to register: ${responseBody['message'] ?? response.reasonPhrase}');
       }
     } catch (e) {
       throw Exception('Error registering: $e');
     }
   }
+
+
 
   Future<LoginResponse> login(LoginRequest request) async {
 

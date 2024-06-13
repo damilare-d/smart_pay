@@ -3,7 +3,6 @@ import 'package:smartpay/app/app.locator.dart';
 import 'api_service.dart';
 import 'package:smartpay/core/models/models.dart';
 
-
 class AuthRepository {
   final ApiService _apiService = locator<ApiService>();
 
@@ -11,11 +10,14 @@ class AuthRepository {
     return await _apiService.requestEmailToken(EmailTokenRequest(email: email));
   }
 
-  Future<VerifyEmailTokenResponse> verifyEmailToken(String email, String token) async {
-    return await _apiService.verifyEmailToken(VerifyEmailTokenRequest(email: email, token: token));
+  Future<VerifyEmailTokenResponse> verifyEmailToken(
+      String email, String token) async {
+    return await _apiService
+        .verifyEmailToken(VerifyEmailTokenRequest(email: email, token: token));
   }
 
-  Future<RegisterResponse> register(String fullName, String? username, String email, String country, String password, String deviceName) async {
+  Future<RegisterResponse> register(String fullName, String? username,
+      String email, String country, String password, String deviceName) async {
     return await _apiService.register(RegisterRequest(
       fullName: fullName,
       username: username,
@@ -26,7 +28,8 @@ class AuthRepository {
     ));
   }
 
-  Future<LoginResponse> login(String email, String password, String deviceName) async {
+  Future<LoginResponse> login(
+      String email, String password, String deviceName) async {
     return await _apiService.login(LoginRequest(
       email: email,
       password: password,
