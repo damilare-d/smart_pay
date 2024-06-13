@@ -9,6 +9,7 @@ import 'package:stacked/stacked.dart';
 class SignInViewModel extends BaseViewModel{
   final _navigationService = locator<NavigationService>();
   final _authRepository = locator<AuthRepository>();
+  final _bottomSheetService = locator<BottomSheetService>();
   LoginResponse? loginResponse;
 
   TextEditingController emailController  = TextEditingController();
@@ -56,12 +57,18 @@ class SignInViewModel extends BaseViewModel{
   }
 
   void googleAuth() {
+    _bottomSheetService.showBottomSheet(
+        title: '....',
+        description: 'Upcoming feature, stay smart',);
 
   }
 
   void appleAuth() {
+    _bottomSheetService.showBottomSheet(
+        title: '....',
+        description: 'Upcoming feature, stay smart',);
 
-  }
+    }
 
   void signUp() {
     _navigationService.navigateTo(Routes.signUpView);

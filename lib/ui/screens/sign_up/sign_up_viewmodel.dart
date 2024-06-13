@@ -24,14 +24,12 @@ class SignUpViewModel extends BaseViewModel {
         _bottomSheetService.showBottomSheet(
           title: 'Error',
           description: emailTokenResponse?.message ?? 'Unknown error occurred',
-
         );
       }
     } catch (e) {
       _bottomSheetService.showBottomSheet(
         title: 'Error',
         description: 'Error requesting email token: $e',
-
       );
     } finally {
       setBusy(false);
