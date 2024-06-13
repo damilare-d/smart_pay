@@ -22,7 +22,7 @@ class SignUpView extends StatelessWidget {
             (BuildContext context, SignUpViewModel viewModel, Widget? child) {
           return Scaffold(
             appBar: const CustomAppBar(),
-            body: Padding(
+            body: SingleChildScrollView(
               padding: const EdgeInsets.all(24.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
