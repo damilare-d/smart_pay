@@ -82,7 +82,7 @@ class SignInView extends StatelessWidget {
                       ),
                       CustomButton(text: "Sign In", onPressed: viewModel.signIn),
                       const SizedBox(height: 32),
-                      divider(),
+                      const divider(),
                       const SizedBox(height: 32),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
