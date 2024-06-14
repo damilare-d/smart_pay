@@ -7,10 +7,12 @@
 import 'package:stacked_services/stacked_services.dart';
 
 import 'app.locator.dart';
+import '../ui/bottom_sheets/country_selwcwtion_sheet/country_selection_sheet.dart';
 import '../ui/bottom_sheets/notice/notice_sheet.dart';
 
 enum BottomSheetType {
   notice,
+  countrySelection,
 }
 
 void setupBottomSheetUi() {
@@ -19,6 +21,8 @@ void setupBottomSheetUi() {
   final Map<BottomSheetType, SheetBuilder> builders = {
     BottomSheetType.notice: (context, request, completer) =>
         NoticeSheet(request: request, completer: completer),
+    BottomSheetType.countrySelection: (context, request, completer) =>
+        CountrySelectionSheet(request: request, completer: completer),
   };
 
   bottomsheetService.setCustomSheetBuilders(builders);
