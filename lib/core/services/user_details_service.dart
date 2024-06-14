@@ -8,4 +8,5 @@ class UserDetailsService {
   String pin = "";
 
   String deviceName = "";
+  String jwtToken = "";
 }

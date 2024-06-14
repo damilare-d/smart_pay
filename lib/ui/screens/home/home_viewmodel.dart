@@ -1,18 +1,18 @@
-
-import 'package:smartpay/app/app.bottomsheets.dart';
-import 'package:smartpay/app/app.dialogs.dart';
 import 'package:smartpay/app/app.locator.dart';
+import 'package:smartpay/app/app.dialogs.dart';
+import 'package:smartpay/app/app.bottomsheets.dart';
+import 'package:smartpay/core/services/user_details_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-
-import '../../common/app_strings.dart';
+import 'package:smartpay/core/services/api_service.dart';
 
 class HomeViewModel extends BaseViewModel {
-  final _dialogService = locator<DialogService>();
-  final _bottomSheetService = locator<BottomSheetService>();
+  final DialogService _dialogService = locator<DialogService>();
+  final BottomSheetService _bottomSheetService = locator<BottomSheetService>();
+  final ApiService _apiService = locator<ApiService>();
+  final _userDetailService = locator<UserDetailsService>();
 
   String get counterLabel => 'Counter is: $_counter';
-
   int _counter = 0;
 
   void incrementCounter() {
@@ -31,8 +31,28 @@ class HomeViewModel extends BaseViewModel {
   void showBottomSheet() {
     _bottomSheetService.showCustomSheet(
       variant: BottomSheetType.notice,
-      title: ksHomeBottomSheetTitle,
-      description: ksHomeBottomSheetDescription,
+      title: 'Custom Bottom Sheet Title',
+      description: 'Custom Bottom Sheet Description',
     );
+  }
+
+  Future<void> fetchAndShowSecretSentence() async {
+    setBusy(true);
+    final response = await _apiService.fetchSecretSentence(_userDetailService.jwtToken);
+    setBusy(false);
+
+    if (response.success) {
+      _dialogService.showCustomDialog(
+        variant: DialogType.infoAlert,
+        title: 'Secret Sentence',
+        description: response.data!,
+      );
+    } else {
+      _dialogService.showCustomDialog(
+        variant: DialogType.infoAlert,
+        title: 'Error',
+        description: response.error!,
+      );
+    }
   }
 }
