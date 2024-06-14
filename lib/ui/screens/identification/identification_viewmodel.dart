@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:smartpay/app/app.locator.dart';
 import 'package:smartpay/app/app.router.dart';
+import 'package:smartpay/app/application.dart';
 import 'package:smartpay/core/models/register_model.dart';
 import 'package:smartpay/core/services/auth_repository.dart';
-import 'package:smartpay/core/services/user_details_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:smartpay/core/services/user_details_service.dart';
+
+import '../../../core/models/models.dart';
+import '../../bottom_sheets/country_selwcwtion_sheet/country_selection_sheet.dart';
 
 class IdentificationViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
-  final _bottomSheetService = locator<BottomSheetService>();
   final _authRepository = locator<AuthRepository>();
-  final _userDetail = locator<UserDetailsService>();
+  final _bottomSheetService = locator<BottomSheetService>();
+  final _userDetailsService = locator<UserDetailsService>();
   RegisterResponse? registerResponse;
 
   TextEditingController userNameController = TextEditingController();
@@ -19,35 +23,36 @@ class IdentificationViewModel extends BaseViewModel {
   TextEditingController passwordController = TextEditingController();
 
   bool isPassWordVisible = false;
+  Country? selectedCountry;
 
   changePasswordVisibility() {
     isPassWordVisible = !isPassWordVisible;
     notifyListeners();
   }
 
-  Future<void> register(String fullName, String? username, String email,
-      String country, String password, String deviceName) async {
+  Future<void> registerDetails() async {
     setBusy(true);
     try {
       registerResponse = await _authRepository.register(
-          fullName, username, email, country, password, deviceName);
+          fullNameController.text,
+          userNameController.text,
+          _userDetailsService.email,
+          selectedCountry?.code ?? "NG",
+          passwordController.text,
+          "phone");
+
       if (registerResponse?.status == true) {
         _navigationService.navigateTo(Routes.createPinView);
       } else {
-        final errors = registerResponse?.errors;
-        String errorMessage = registerResponse?.message ?? 'Registration failed';
-        if (errors != null && errors.isNotEmpty) {
-          errorMessage += '\n${errors.values.map((e) => e.join(', ')).join('\n')}';
-        }
         await _bottomSheetService.showBottomSheet(
           title: 'Registration Failed',
-          description: errorMessage,
+          description: registerResponse?.message ?? 'Registration failed',
         );
       }
     } catch (e) {
       await _bottomSheetService.showBottomSheet(
         title: 'Error',
-        description: 'Error during registration: $e ',
+        description: 'Error during registration: $e',
       );
     } finally {
       setBusy(false);
@@ -55,26 +60,27 @@ class IdentificationViewModel extends BaseViewModel {
     }
   }
 
+  String? get countrySelected => _userDetailsService.country;
 
-  void registerDetails() {
-    if (fullNameController.text.isEmpty || passwordController.text.isEmpty) {
-      _bottomSheetService.showBottomSheet(
-        title: 'Input Error',
-        description: 'Full name and password cannot be empty',
-      );
-      return;
+
+  void showCountrySelection(BuildContext context) async {
+    final response = await _bottomSheetService.showCustomSheet(
+      variant: BottomSheetType.countrySelection,
+      data: CountrySelectionSheet(
+        completer: (response) {
+          if (response != null) {
+            selectedCountry = response.data;
+            notifyListeners();
+          }
+        },
+        request: SheetRequest(),
+      ),
+    );
+
+    if (response?.confirmed == true) {
+      selectedCountry = response?.data;
+      notifyListeners();
+      rebuildUi();
     }
-    _userDetail.country = "";
-    _userDetail.fullName = fullNameController.text;
-    _userDetail.userName = userNameController.text;
-    _userDetail.password = passwordController.text;
-
-    register(
-        fullNameController.text,
-        userNameController.text,
-        _userDetail.email,
-        "NG",
-        passwordController.text,
-        "phone");
   }
 }

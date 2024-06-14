@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:smartpay/ui/screens/identification/identification_viewmodel.dart';
 import 'package:smartpay/ui/styles/colors.dart';
@@ -18,7 +16,7 @@ class IdentificationView extends StatelessWidget {
     return ViewModelBuilder<IdentificationViewModel>.reactive(
         viewModelBuilder:()=> IdentificationViewModel(),
         builder: (
-        BuildContext context, IdentificationViewModel viewModel, Widget? child
+            BuildContext context, IdentificationViewModel viewModel, Widget? child
             ){
           return Scaffold(
             appBar: const CustomAppBar(),
@@ -64,10 +62,30 @@ class IdentificationView extends StatelessWidget {
                     hintText: 'Username',
                     borderRadius: BorderRadius.circular(16),
                   ),
-
-                  /// todo
-                  /// create a container list tile and a bottom sheet to selec
-                  /// countries.
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  GestureDetector(
+                    onTap:() => viewModel.showCountrySelection(context),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+                      decoration: BoxDecoration(
+                        color: const Color(0xffF9FAFB),
+                        border: Border.all(color: Colors.transparent),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            (viewModel.countrySelected == null) ? 'Country' : viewModel.countrySelected!,
+                            style: TextStyles(ThemeNotifier()).bodyLarge.copyWith(fontWeight: FontWeight.w600, fontSize: 16),
+                          ),
+                          const Icon(Icons.keyboard_arrow_down, color: kcAccentLightColor2),
+                        ],
+                      ),
+                    ),
+                  ),
                   const SizedBox(
                     height: 16,
                   ),
@@ -83,12 +101,10 @@ class IdentificationView extends StatelessWidget {
                   ),
                   const SizedBox(height: 24,),
                   CustomButton(text: "Continue", onPressed: viewModel.registerDetails),
-
                 ],
               ),
             ),
           );
-
         });
   }
 }

@@ -6,4 +6,6 @@ class UserDetailsService {
   String country = "";
   String password = "";
   String pin = "";
+
+  String deviceName = "";
 }

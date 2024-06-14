@@ -1,6 +1,7 @@
 import 'package:smartpay/core/services/api_service.dart';
 import 'package:smartpay/core/services/auth_repository.dart';
 import 'package:smartpay/core/services/user_details_service.dart';
+import 'package:smartpay/ui/bottom_sheets/country_selwcwtion_sheet/country_selection_sheet.dart';
 import 'package:smartpay/ui/screens/confirmation/confirmation_view.dart';
 import 'package:smartpay/ui/screens/create_new_password/create_new_password_view.dart';
 import 'package:smartpay/ui/screens/identification/identification_view.dart';
@@ -51,6 +52,7 @@ import '../ui/styles/theme_manager.dart';
   ],
   bottomsheets: [
     StackedBottomsheet(classType: NoticeSheet),
+    StackedBottomsheet(classType: CountrySelectionSheet),
     // @stacked-bottom-sheet
   ],
   dialogs: [
