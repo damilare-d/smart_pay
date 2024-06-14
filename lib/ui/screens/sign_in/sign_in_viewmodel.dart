@@ -4,6 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:smartpay/app/app.locator.dart';
 import 'package:smartpay/app/app.router.dart';
 import 'package:smartpay/core/services/auth_repository.dart';
+import 'package:smartpay/core/services/user_details_service.dart';
 import 'package:smartpay/ui/styles/colors.dart';
 import 'package:stacked/stacked.dart';
 
@@ -14,6 +15,7 @@ class SignInViewModel extends BaseViewModel {
   final _navigationService = locator<NavigationService>();
   final _authRepository = locator<AuthRepository>();
   final _bottomSheetService = locator<BottomSheetService>();
+  final _userDetailService = locator<UserDetailsService>();
   LoginResponse? loginResponse;
 
   TextEditingController emailController = TextEditingController();
@@ -26,6 +28,7 @@ class SignInViewModel extends BaseViewModel {
     try {
       loginResponse = await _authRepository.login(emailController.text, passwordController.text, "web");
       if (loginResponse?.status == true) {
+        _userDetailService.jwtToken = loginResponse!.data.token;
         _navigationService.navigateTo(Routes.homeView);
       } else {
         Fluttertoast.showToast(

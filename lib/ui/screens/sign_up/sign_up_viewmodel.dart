@@ -21,6 +21,7 @@ class SignUpViewModel extends BaseViewModel {
     try {
       emailTokenResponse = await _authRepository.requestEmailToken(email);
       if (emailTokenResponse?.status == true) {
+        _userDetail.jwtToken = emailTokenResponse!.data.token;
         _navigationService.navigateTo(Routes.authenticationView,
             arguments: AuthenticationViewArguments(
                 email: email,
