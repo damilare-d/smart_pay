@@ -42,7 +42,7 @@ class CountrySelectionSheet extends StackedView<CountrySelectionSheetModel> {
                   controller: viewModel.searchController,
                   decoration: InputDecoration(
                     hintText: 'Search',
-                    prefixIcon: Icon(Icons.search),
+                    prefixIcon: const Icon(Icons.search),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(16),
                     ),
@@ -51,7 +51,7 @@ class CountrySelectionSheet extends StackedView<CountrySelectionSheetModel> {
                 ),
               ),
               IconButton(
-                icon: Icon(Icons.cancel),
+                icon: const Icon(Icons.cancel),
                 onPressed: () => Navigator.pop(context),
               ),
             ],
@@ -73,7 +73,7 @@ class CountrySelectionSheet extends StackedView<CountrySelectionSheetModel> {
                   onTap: () {
                     viewModel.selectCountry(country);
                     completer?.call(SheetResponse(confirmed: true, data: country));
-                    Navigator.pop(context);
+                    Navigator.of(context).pop;
                   },
                 );
               },
