@@ -17,15 +17,19 @@ class LoginRequest {
 class LoginResponse {
   final bool status;
   final String message;
-  final LoginData data;
+  final LoginData? data;
+  final Map<String, List<String>>? errors;
 
-  LoginResponse({required this.status, required this.message, required this.data});
+  LoginResponse({required this.status, required this.message, this.data, this.errors});
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) {
     return LoginResponse(
       status: json['status'],
       message: json['message'],
-      data: LoginData.fromJson(json['data']),
+      data: json['data'] != null ? LoginData.fromJson(json['data']) : null,
+      errors: json['errors'] != null
+          ? (json['errors'] as Map<String, dynamic>).map((key, value) => MapEntry(key, List<String>.from(value)))
+          : null,
     );
   }
 }

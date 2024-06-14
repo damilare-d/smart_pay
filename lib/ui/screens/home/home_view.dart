@@ -24,9 +24,9 @@ class HomeView extends StatelessWidget {
                   verticalSpaceLarge,
                   Column(
                     children: [
-                      const Text(
-                        'Hello, STACKED!',
-                        style: TextStyle(
+                       Text(
+                        'Hello! ${viewModel.fullname ?? ""}',
+                        style: const TextStyle(
                           fontSize: 35,
                           fontWeight: FontWeight.w900,
                         ),
@@ -43,32 +43,17 @@ class HomeView extends StatelessWidget {
                     ],
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       MaterialButton(
                         color: kcDarkGreyColor,
-                        onPressed: viewModel.showDialog,
-                        child: const Text(
-                          'Show Dialog',
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      MaterialButton(
-                        color: kcDarkGreyColor,
-                        onPressed: viewModel.showBottomSheet,
-                        child: const Text(
-                          'Show Bottom Sheet',
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      MaterialButton(
-                        color: kcDarkGreyColor,
                         onPressed: () => viewModel.fetchAndShowSecretSentence(),
-                        child: const Text(
+                        child:
+                            viewModel.isBusy ?
+                            const CircularProgressIndicator(
+                              color: Colors.white,
+                            ):
+                        const Text(
                           'Fetch Secret Sentence',
                           style: TextStyle(
                             color: Colors.white,

@@ -27,6 +27,7 @@ class CountrySelectionSheetModel extends BaseViewModel {
   ];
 
   List<Country> filteredCountries = [];
+  Country? selectedCountry;
 
   CountrySelectionSheetModel() {
     filteredCountries = countries;
@@ -46,7 +47,10 @@ class CountrySelectionSheetModel extends BaseViewModel {
   }
 
   void selectCountry(Country country) {
+    selectedCountry = country;
     _userDetailsService.country = country.name;
+    print("selected country is $selectedCountry & ${ _userDetailsService.country}" );
     notifyListeners();
   }
+
 }

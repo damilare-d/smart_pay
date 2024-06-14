@@ -12,6 +12,8 @@ class HomeViewModel extends BaseViewModel {
   final ApiService _apiService = locator<ApiService>();
   final _userDetailService = locator<UserDetailsService>();
 
+  String? fullname = locator<UserDetailsService>().fullName;
+
   String get counterLabel => 'Counter is: $_counter';
   int _counter = 0;
 

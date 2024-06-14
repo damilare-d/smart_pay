@@ -11,6 +11,7 @@ class EmailTokenResponse {
   final String message;
   final EmailTokenData data;
 
+
   EmailTokenResponse({required this.status, required this.message, required this.data});
 
   factory EmailTokenResponse.fromJson(Map<String, dynamic> json) {

@@ -14,10 +14,9 @@ class IdentificationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<IdentificationViewModel>.reactive(
-        viewModelBuilder:()=> IdentificationViewModel(),
-        builder: (
-            BuildContext context, IdentificationViewModel viewModel, Widget? child
-            ){
+        viewModelBuilder: () => IdentificationViewModel(),
+        builder: (BuildContext context, IdentificationViewModel viewModel,
+            Widget? child) {
           return Scaffold(
             appBar: const CustomAppBar(),
             body: SingleChildScrollView(
@@ -48,7 +47,9 @@ class IdentificationView extends StatelessWidget {
                     ),
                     textAlign: TextAlign.start,
                   ),
-                  const SizedBox(height: 32,),
+                  const SizedBox(
+                    height: 32,
+                  ),
                   AuthField(
                     controller: viewModel.fullNameController,
                     hintText: 'Full name',
@@ -66,9 +67,10 @@ class IdentificationView extends StatelessWidget {
                     height: 16,
                   ),
                   GestureDetector(
-                    onTap:() => viewModel.showCountrySelection(context),
+                    onTap: () => viewModel.showCountrySelection(context),
                     child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 16, horizontal: 12),
                       decoration: BoxDecoration(
                         color: const Color(0xffF9FAFB),
                         border: Border.all(color: Colors.transparent),
@@ -78,10 +80,14 @@ class IdentificationView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            (viewModel.countrySelected == null) ? 'Country' : viewModel.countrySelected!,
-                            style: TextStyles(ThemeNotifier()).bodyLarge.copyWith(fontWeight: FontWeight.w600, fontSize: 16),
+                            viewModel.countrySelected ?? 'Country',
+                            style: TextStyles(ThemeNotifier())
+                                .bodyLarge
+                                .copyWith(
+                                    fontWeight: FontWeight.w600, fontSize: 16),
                           ),
-                          const Icon(Icons.keyboard_arrow_down, color: kcAccentLightColor2),
+                          const Icon(Icons.keyboard_arrow_down,
+                              color: kcAccentLightColor2),
                         ],
                       ),
                     ),
@@ -99,8 +105,11 @@ class IdentificationView extends StatelessWidget {
                     maxLines: 1,
                     changeVisibilty: viewModel.changePasswordVisibility,
                   ),
-                  const SizedBox(height: 24,),
-                  CustomButton(text: "Continue", onPressed: viewModel.registerDetails),
+                  const SizedBox(
+                    height: 24,
+                  ),
+                  CustomButton(
+                      text: "Continue", onPressed: viewModel.registerDetails),
                 ],
               ),
             ),

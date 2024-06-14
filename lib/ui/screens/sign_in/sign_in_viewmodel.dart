@@ -28,11 +28,12 @@ class SignInViewModel extends BaseViewModel {
     try {
       loginResponse = await _authRepository.login(emailController.text, passwordController.text, "web");
       if (loginResponse?.status == true) {
-        _userDetailService.jwtToken = loginResponse!.data.token;
+        _userDetailService.jwtToken = loginResponse!.data!.token;
+        _userDetailService.fullName = loginResponse!.data!.user.fullName;
         _navigationService.navigateTo(Routes.homeView);
       } else {
         Fluttertoast.showToast(
-          msg: loginResponse?.message ?? 'Login failed',
+          msg: loginResponse?.errors.toString() ?? 'Login failed',
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           backgroundColor: Colors.red,

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:smartpay/app/app.locator.dart';
 import 'package:smartpay/app/app.router.dart';
-import 'package:smartpay/app/application.dart';
 import 'package:smartpay/core/models/register_model.dart';
 import 'package:smartpay/core/services/auth_repository.dart';
+import 'package:smartpay/core/services/user_details_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:smartpay/core/services/user_details_service.dart';
 
+import '../../../app/app.bottomsheets.dart';
 import '../../../core/models/models.dart';
 import '../../bottom_sheets/country_selwcwtion_sheet/country_selection_sheet.dart';
 
@@ -25,43 +25,37 @@ class IdentificationViewModel extends BaseViewModel {
   bool isPassWordVisible = false;
   Country? selectedCountry;
 
-  changePasswordVisibility() {
+  void changePasswordVisibility() {
     isPassWordVisible = !isPassWordVisible;
     notifyListeners();
   }
 
   Future<void> registerDetails() async {
     setBusy(true);
-    try {
+
       registerResponse = await _authRepository.register(
-          fullNameController.text,
-          userNameController.text,
-          _userDetailsService.email,
-          selectedCountry?.code ?? "NG",
-          passwordController.text,
-          "phone");
+        fullNameController.text,
+        userNameController.text,
+        _userDetailsService.email,
+        selectedCountry?.code ?? "NG",
+        passwordController.text,
+        "phone",
+      );
 
       if (registerResponse?.status == true) {
         _navigationService.navigateTo(Routes.createPinView);
       } else {
         await _bottomSheetService.showBottomSheet(
           title: 'Registration Failed',
-          description: registerResponse?.message ?? 'Registration failed',
+          description: registerResponse?.errors.toString() ?? 'Registration failed',
         );
       }
-    } catch (e) {
-      await _bottomSheetService.showBottomSheet(
-        title: 'Error',
-        description: 'Error during registration: $e',
-      );
-    } finally {
       setBusy(false);
       notifyListeners();
-    }
+
   }
 
-  String? get countrySelected => _userDetailsService.country;
-
+  String? get countrySelected => selectedCountry?.name;
 
   void showCountrySelection(BuildContext context) async {
     final response = await _bottomSheetService.showCustomSheet(
@@ -80,7 +74,6 @@ class IdentificationViewModel extends BaseViewModel {
     if (response?.confirmed == true) {
       selectedCountry = response?.data;
       notifyListeners();
-      rebuildUi();
     }
   }
 }

@@ -63,15 +63,18 @@ class CountrySelectionSheet extends StackedView<CountrySelectionSheetModel> {
               itemBuilder: (context, index) {
                 final country = viewModel.filteredCountries[index];
                 return ListTile(
-                  leading: SvgPicture.asset(country.flag, width: 24),
-                  title: Text(country.name),
-                  trailing: viewModel.isSelectedCountry(country)
-                      ? Icon(Icons.check, color: kcAccentLightColor1)
+                  leading: Text(country.flag),
+                  title: Text('${country.code} - ${country.name}'),
+                  trailing: viewModel.selectedCountry == country
+                      ? const Icon(Icons.check, color: kcPrimaryColor)
                       : null,
-                  onTap: () => viewModel.selectCountry(country),
-                  tileColor: viewModel.isSelectedCountry(country)
-                      ? Color(0xffF9FAFB)
-                      : Colors.transparent,
+                  selected: viewModel.selectedCountry == country,
+                  selectedTileColor: Color(0xffF9FAFB),
+                  onTap: () {
+                    viewModel.selectCountry(country);
+                    completer?.call(SheetResponse(confirmed: true, data: country));
+                    Navigator.pop(context);
+                  },
                 );
               },
             ),

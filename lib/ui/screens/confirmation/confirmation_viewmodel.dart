@@ -19,6 +19,7 @@ class ConfirmationViewModel extends BaseViewModel {
       loginResponse = await _authRepository.login(_userDetailsService.email,
           _userDetailsService.password, "phone");
       if (loginResponse?.status == true) {
+        _userDetailsService.jwtToken = loginResponse!.data!.token;
         navigateToHome();
       } else {
         await _bottomSheetService.showBottomSheet(
