@@ -7,6 +7,7 @@ class ApiService {
 
   Future<EmailTokenResponse> requestEmailToken(
       EmailTokenRequest request) async {
+    print(request);
     try {
       final url = Uri.parse('$_baseUrl/auth/email');
       final response = await http.post(
@@ -17,7 +18,7 @@ class ApiService {
         },
         body: jsonEncode(request.toJson()),
       );
-
+      print(response.body);
       if (response.statusCode == 200) {
         return EmailTokenResponse.fromJson(jsonDecode(response.body));
       } else {
@@ -80,6 +81,7 @@ class ApiService {
 
 
   Future<LoginResponse> login(LoginRequest request) async {
+    print(request);
     try {
       final url = Uri.parse('$_baseUrl/auth/login');
       final response = await http.post(
@@ -90,6 +92,7 @@ class ApiService {
         },
         body: jsonEncode(request.toJson()),
       );
+      print(response.body);
 
       if (response.statusCode == 200) {
         return LoginResponse.fromJson(jsonDecode(response.body));
