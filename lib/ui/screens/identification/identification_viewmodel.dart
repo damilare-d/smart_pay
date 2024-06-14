@@ -42,6 +42,8 @@ class IdentificationViewModel extends BaseViewModel {
         "phone",
       );
 
+      print("sth");
+
       if (registerResponse?.status == true) {
         _navigationService.navigateTo(Routes.createPinView);
       } else {
