@@ -20,6 +20,7 @@ class ConfirmationViewModel extends BaseViewModel {
           _userDetailsService.password, "phone");
       if (loginResponse?.status == true) {
         _userDetailsService.jwtToken = loginResponse!.data!.token;
+        String? errorMessage = loginResponse!.errors.toString();
         navigateToHome();
       } else {
         await _bottomSheetService.showBottomSheet(
@@ -40,5 +41,10 @@ class ConfirmationViewModel extends BaseViewModel {
 
   void navigateToHome() {
     _navigationService.navigateTo(Routes.homeView);
+  }
+
+  void onTapGetStarted (){
+    login();
+    navigateToHome();
   }
 }

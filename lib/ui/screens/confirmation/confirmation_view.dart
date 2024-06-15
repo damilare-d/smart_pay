@@ -42,7 +42,7 @@ class ConfirmationView extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 32,),
-                    CustomButton(text: "Get Started", onPressed: viewModel.navigateToHome)
+                    CustomButton(text: "Get Started", onPressed: viewModel.onTapGetStarted)
 
                   ],
                 ),
