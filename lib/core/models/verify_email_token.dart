@@ -10,15 +10,33 @@ class VerifyEmailTokenRequest {
 class VerifyEmailTokenResponse {
   final bool status;
   final String message;
-  final VerifyEmailTokenData data;
+  final dynamic data;
+  final Map<String, List<String>>? errors;
 
-  VerifyEmailTokenResponse({required this.status, required this.message, required this.data});
+  VerifyEmailTokenResponse({required this.status, required this.message, required this.data, this.errors});
 
   factory VerifyEmailTokenResponse.fromJson(Map<String, dynamic> json) {
+
+    Map<String, List<String>>? errors;
+    if (json['errors'] != null) {
+      errors = (json['errors'] as Map<String, dynamic>).map((key, value) {
+        return MapEntry(key, List<String>.from(value as List));
+      });
+    }
+
+    dynamic data;
+    if (json['data'] != null) {
+      if (json['data'] is List) {
+        data = List<Map<String, dynamic>>.from(json['data']);
+      } else if (json['data'] is Map) {
+        data = VerifyEmailTokenData.fromJson(json['data']);
+      }
+    }
     return VerifyEmailTokenResponse(
       status: json['status'],
       message: json['message'],
-      data: VerifyEmailTokenData.fromJson(json['data']),
+      data: data,
+      errors: errors
     );
   }
 }

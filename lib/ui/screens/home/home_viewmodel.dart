@@ -1,6 +1,7 @@
 import 'package:smartpay/app/app.locator.dart';
 import 'package:smartpay/app/app.dialogs.dart';
 import 'package:smartpay/app/app.bottomsheets.dart';
+import 'package:smartpay/app/app.router.dart';
 import 'package:smartpay/core/services/user_details_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -9,6 +10,7 @@ import 'package:smartpay/core/services/api_service.dart';
 class HomeViewModel extends BaseViewModel {
   final DialogService _dialogService = locator<DialogService>();
   final BottomSheetService _bottomSheetService = locator<BottomSheetService>();
+  final NavigationService _navigationService = locator<NavigationService>();
   final ApiService _apiService = locator<ApiService>();
   final _userDetailService = locator<UserDetailsService>();
 
@@ -56,5 +58,9 @@ class HomeViewModel extends BaseViewModel {
         description: response.error!,
       );
     }
+  }
+
+  void navigateToLogin() {
+    _navigationService.replaceWithSignInView();
   }
 }
