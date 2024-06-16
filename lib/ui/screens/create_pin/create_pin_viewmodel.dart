@@ -11,6 +11,8 @@ class CreatePinViewModel extends BaseViewModel{
 
 
   void createPin() {
-    _navigationService.navigateTo(Routes.confirmationView);
+    if(pinCodeController.text.length == 5 ) {
+      _navigationService.navigateTo(Routes.confirmationView);
+    }
   }
 }

@@ -4,6 +4,7 @@ import 'package:smartpay/app/app.router.dart';
 import 'package:smartpay/core/models/register_model.dart';
 import 'package:smartpay/core/services/auth_repository.dart';
 import 'package:smartpay/core/services/user_details_service.dart';
+import 'package:smartpay/utils/extensions.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -32,7 +33,7 @@ class IdentificationViewModel extends BaseViewModel {
 
   Future<void> registerDetails() async {
     setBusy(true);
-
+    try {
       registerResponse = await _authRepository.register(
         fullNameController.text,
         userNameController.text,
@@ -42,19 +43,34 @@ class IdentificationViewModel extends BaseViewModel {
         "phone",
       );
 
-      print("sth");
-
       if (registerResponse?.status == true) {
+        _userDetailsService.fullName = fullNameController.text;
+        _userDetailsService.userName = userNameController.text;
+        _userDetailsService.password = passwordController.text;
+
         _navigationService.navigateTo(Routes.createPinView);
       } else {
+        String errorMessage = registerResponse?.message ??
+            'Registration failed';
+        if (registerResponse?.errors != null) {
+          registerResponse!.errors!.forEach((key, value) {
+            errorMessage += '\n${key.capitalize()}: ${value.join(', ')}';
+          });
+        }
         await _bottomSheetService.showBottomSheet(
           title: 'Registration Failed',
-          description: registerResponse?.errors.toString() ?? 'Registration failed',
+          description: errorMessage,
         );
       }
+    }catch(e){
+      await _bottomSheetService.showBottomSheet(
+        title: 'Error',
+        description: 'Error registering: $e',
+      );
+    } finally {
       setBusy(false);
       notifyListeners();
-
+    }
   }
 
   String? get countrySelected => selectedCountry?.name;

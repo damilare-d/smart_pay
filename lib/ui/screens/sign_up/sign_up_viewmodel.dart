@@ -4,6 +4,7 @@ import 'package:smartpay/app/app.router.dart';
 import 'package:smartpay/core/models/email_token_model.dart';
 import 'package:smartpay/core/services/auth_repository.dart';
 import 'package:smartpay/core/services/user_details_service.dart';
+import 'package:smartpay/utils/extensions.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -27,14 +28,20 @@ class SignUpViewModel extends BaseViewModel {
                 email: email,
                 verificationToken: emailTokenResponse?.data.token));
       } else {
-        _bottomSheetService.showBottomSheet(
+        String errorMessage = emailTokenResponse?.message ?? 'Signup failed';
+        if (emailTokenResponse?.errors != null) {
+          emailTokenResponse!.errors!.forEach((key, value) {
+            errorMessage += '\n${key.capitalize()}: ${value.join(', ')}';
+          });
+        }
+        await _bottomSheetService.showBottomSheet(
           title: 'Error',
-          description: emailTokenResponse?.message ?? 'Unknown error occurred',
+          description: errorMessage,
         );
       }
     } catch (e) {
       print(e);
-      _bottomSheetService.showBottomSheet(
+      await _bottomSheetService.showBottomSheet(
         title: 'Error',
         description: 'Error requesting email token: $e',
       );
@@ -51,15 +58,15 @@ class SignUpViewModel extends BaseViewModel {
 
   void googleAuth() {
     _bottomSheetService.showBottomSheet(
-      title: '....',
-      description: 'Upcoming feature, stay smart',
+      title: 'Upcoming Feature',
+      description: 'Stay tuned for Google Authentication.',
     );
   }
 
   void appleAuth() {
     _bottomSheetService.showBottomSheet(
-      title: '....',
-      description: 'Upcoming feature, stay smart',
+      title: 'Upcoming Feature',
+      description: 'Stay tuned for Apple Authentication.',
     );
   }
 
