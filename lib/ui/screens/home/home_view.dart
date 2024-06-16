@@ -13,6 +13,17 @@ class HomeView extends StatelessWidget {
     return ViewModelBuilder<HomeViewModel>.reactive(
       viewModelBuilder: () => HomeViewModel(),
       builder: (context, viewModel, child) => Scaffold(
+        appBar: AppBar(
+         automaticallyImplyLeading: false,
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.login),
+              onPressed: () {
+               viewModel.navigateToLogin();
+              },
+            ),
+          ],
+        ),
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
