@@ -40,7 +40,7 @@ class ConfirmationViewModel extends BaseViewModel {
   }
 
   void navigateToHome() {
-    _navigationService.navigateTo(Routes.homeView);
+    _navigationService.replaceWithHomeView();
   }
 
   void onTapGetStarted (){
