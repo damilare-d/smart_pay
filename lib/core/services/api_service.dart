@@ -19,12 +19,9 @@ class ApiService {
         body: jsonEncode(request.toJson()),
       );
       print(response.body);
-      if (response.statusCode == 200) {
+
         return EmailTokenResponse.fromJson(jsonDecode(response.body));
-      } else {
-        throw Exception(
-            'Failed to request email token: ${response.reasonPhrase}');
-      }
+
     } catch (e) {
       throw Exception('Error requesting email token: $e');
     }
@@ -43,12 +40,8 @@ class ApiService {
         body: jsonEncode(request.toJson()),
       );
 
-      if (response.statusCode == 200) {
         return VerifyEmailTokenResponse.fromJson(jsonDecode(response.body));
-      } else {
-        throw Exception(
-            'Failed to verify email token: ${response.reasonPhrase}');
-      }
+
     } catch (e) {
       throw Exception('Error verifying email token: $e');
     }
@@ -67,13 +60,9 @@ class ApiService {
         body: jsonEncode(request.toJson()),
       );
       print(response.body);
-      if (response.statusCode == 200) {
+
         return RegisterResponse.fromJson(jsonDecode(response.body));
-      } else {
-        final responseBody = jsonDecode(response.body);
-        throw Exception('Failed to register: ${responseBody['message'] ??
-            response.reasonPhrase}');
-      }
+
     } catch (e) {
       throw Exception('Error registering: $e');
     }
