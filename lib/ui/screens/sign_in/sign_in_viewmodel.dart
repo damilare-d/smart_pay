@@ -6,6 +6,7 @@ import 'package:smartpay/app/app.router.dart';
 import 'package:smartpay/core/services/auth_repository.dart';
 import 'package:smartpay/core/services/user_details_service.dart';
 import 'package:smartpay/ui/styles/colors.dart';
+import 'package:smartpay/utils/extensions.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../app/application.dart';
@@ -27,29 +28,27 @@ class SignInViewModel extends BaseViewModel {
     setBusy(true);
     try {
       loginResponse = await _authRepository.login(emailController.text, passwordController.text, "web");
+
       if (loginResponse?.status == true) {
         _userDetailService.jwtToken = loginResponse!.data!.token;
         _userDetailService.fullName = loginResponse!.data!.user.fullName;
         _navigationService.navigateTo(Routes.homeView);
       } else {
-        Fluttertoast.showToast(
-          msg: loginResponse?.errors.toString() ?? 'Login failed',
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.BOTTOM,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0,
+        String errorMessage = loginResponse?.message ?? 'Login failed';
+        if (loginResponse?.errors != null) {
+          loginResponse!.errors!.forEach((key, value) {
+            errorMessage += '\n${key.capitalize()}: ${value.join(', ')}';
+          });
+        }
+        await _bottomSheetService.showBottomSheet(
+          title: 'Error',
+          description: errorMessage,
         );
       }
     } catch (e) {
-      print(e);
-      Fluttertoast.showToast(
-        msg: 'Error logging in: $e',
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        backgroundColor: kcAccentLightColor2,
-        textColor: Colors.white,
-        fontSize: 16.0,
+      await _bottomSheetService.showBottomSheet(
+        title: 'Error',
+        description: 'Error logging in: $e',
       );
     } finally {
       setBusy(false);
@@ -58,20 +57,16 @@ class SignInViewModel extends BaseViewModel {
   }
 
   void signIn() {
-    print(emailController.text);
     if (emailController.text.isEmpty || passwordController.text.isEmpty) {
-      Fluttertoast.showToast(
-        msg: 'Email and password cannot be empty',
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0,
+      _bottomSheetService.showBottomSheet(
+        title: 'Error',
+        description: 'Email and password cannot be empty',
       );
       return;
     }
     login();
   }
+
 
   changePasswordVisibility() {
     isPassWordVisible = !isPassWordVisible;

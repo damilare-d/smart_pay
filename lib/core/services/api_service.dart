@@ -94,15 +94,13 @@ class ApiService {
       );
       print(response.body);
 
-      if (response.statusCode == 200) {
-        return LoginResponse.fromJson(jsonDecode(response.body));
-      } else {
-        throw Exception('Failed to login: ${response.reasonPhrase}');
-      }
+      return LoginResponse.fromJson(jsonDecode(response.body));
     } catch (e) {
+      print(e);
       throw Exception('Error logging in: $e');
     }
   }
+
 
 
   Future<GetPhraseResponse<String>> fetchSecretSentence(String authToken) async {

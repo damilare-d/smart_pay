@@ -17,19 +17,39 @@ class LoginRequest {
 class LoginResponse {
   final bool status;
   final String message;
-  final LoginData? data;
+  final dynamic data;
   final Map<String, List<String>>? errors;
 
-  LoginResponse({required this.status, required this.message, this.data, this.errors});
+  LoginResponse({
+    required this.status,
+    required this.message,
+    this.data,
+    this.errors,
+  });
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) {
+    Map<String, List<String>>? errors;
+
+    if (json['errors'] != null) {
+      errors = (json['errors'] as Map<String, dynamic>).map((key, value) {
+        return MapEntry(key, List<String>.from(value as List));
+      });
+    }
+
+    dynamic data;
+    if (json['data'] != null) {
+      if (json['data'] is List) {
+        data = List<Map<String, dynamic>>.from(json['data']);
+      } else if (json['data'] is Map) {
+        data = LoginData.fromJson(json['data']);
+      }
+    }
+
     return LoginResponse(
       status: json['status'],
       message: json['message'],
-      data: json['data'] != null ? LoginData.fromJson(json['data']) : null,
-      errors: json['errors'] != null
-          ? (json['errors'] as Map<String, dynamic>).map((key, value) => MapEntry(key, List<String>.from(value)))
-          : null,
+      data: data,
+      errors: errors,
     );
   }
 }
@@ -47,3 +67,8 @@ class LoginData {
     );
   }
 }
+
+
+
+
+
